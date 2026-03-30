@@ -146,6 +146,9 @@ document.addEventListener('alpine:init', () => {
       // Set up Intersection Observer for active nav
       this.$nextTick(() => this.setupNavObserver());
 
+      // Set up scroll reveal animations
+      this.$nextTick(() => this.setupScrollReveal());
+
       // Keyboard listeners for lightbox
       document.addEventListener('keydown', (e) => {
         if (!this.lightboxOpen) return;
@@ -220,10 +223,15 @@ document.addEventListener('alpine:init', () => {
     openArtist(artist) {
       this.selectedArtist = artist;
       document.body.classList.add('modal-open');
+      this.$nextTick(() => this.setupFocusTrap('.artist-modal-overlay'));
     },
 
     closeArtist() {
       this.selectedArtist = null;
+      if (this._focusTrapHandler) {
+        document.removeEventListener('keydown', this._focusTrapHandler);
+        this._focusTrapHandler = null;
+      }
       if (!this.lightboxOpen && !this.mobileMenuOpen) {
         document.body.classList.remove('modal-open');
       }
@@ -233,10 +241,18 @@ document.addEventListener('alpine:init', () => {
       this.lightboxIndex = index;
       this.lightboxOpen = true;
       document.body.classList.add('modal-open');
+      this.$nextTick(() => {
+        this.setupFocusTrap('.lightbox');
+        this.setupLightboxSwipe();
+      });
     },
 
     closeLightbox() {
       this.lightboxOpen = false;
+      if (this._focusTrapHandler) {
+        document.removeEventListener('keydown', this._focusTrapHandler);
+        this._focusTrapHandler = null;
+      }
       if (!this.selectedArtist && !this.mobileMenuOpen) {
         document.body.classList.remove('modal-open');
       }
@@ -287,6 +303,26 @@ document.addEventListener('alpine:init', () => {
       sections.forEach(s => observer.observe(s));
     },
 
+    // Scroll reveal animation observer
+    setupScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.1,
+      });
+
+      reveals.forEach(el => revealObserver.observe(el));
+    },
+
     // Helper methods exposed to template
     getDisciplineColor,
     getInitials,
@@ -295,6 +331,70 @@ document.addEventListener('alpine:init', () => {
     formatEventDate,
     getDisciplineEmoji(discipline) {
       return DISCIPLINE_EMOJI[discipline] || '\uD83C\uDFA8';
+    },
+
+    setupFocusTrap(selector) {
+      const modal = document.querySelector(selector);
+      if (!modal) return;
+      const focusable = modal.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      first.focus();
+
+      // Remove old trap listener if any
+      if (this._focusTrapHandler) {
+        document.removeEventListener('keydown', this._focusTrapHandler);
+      }
+      this._focusTrapHandler = (e) => {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      };
+      document.addEventListener('keydown', this._focusTrapHandler);
+    },
+
+    setupLightboxSwipe() {
+      const lightbox = document.querySelector('.lightbox');
+      if (!lightbox) return;
+      let touchStartX = 0;
+      let touchEndX = 0;
+      const self = this;
+
+      // Remove old listeners if any
+      if (this._swipeTouchStart) {
+        lightbox.removeEventListener('touchstart', this._swipeTouchStart);
+        lightbox.removeEventListener('touchend', this._swipeTouchEnd);
+      }
+
+      this._swipeTouchStart = (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      };
+      this._swipeTouchEnd = (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            self.nextLightbox();
+          } else {
+            self.prevLightbox();
+          }
+        }
+      };
+
+      lightbox.addEventListener('touchstart', this._swipeTouchStart, { passive: true });
+      lightbox.addEventListener('touchend', this._swipeTouchEnd, { passive: true });
     },
 
     scrollToTop() {

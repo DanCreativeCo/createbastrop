@@ -13,7 +13,85 @@
   <link rel="stylesheet" href="css/styles.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
 </head>
-<body x-data="{ authModalOpen: false, mode: 'login' }" :class="authModalOpen ? 'modal-open' : ''">
+<body x-data="{
+  authModalOpen: false,
+  mode: 'login',
+  submitting: false,
+  showForgotMsg: false,
+  signupPassword: '',
+
+  // Application flow
+  role: '',
+  step: 1,
+
+  // Artist fields
+  artistName: '', artistEmail: '', artistCity: '', artistWebsite: '', artistInstagram: '', artistBio: '',
+  artistTypes: [], artistDescribe: '', artistThemes: [],
+  hasPortfolio: '', portfolioLink: '', artistMedium: '', artistPrice: '', journeyLevel: '',
+  whyJoin: '', participate: [], support: [], agreeArtist: false,
+
+  // Collector fields
+  collectorName: '', collectorEmail: '', collectorCity: '', collectorWebsite: '', collectorInstagram: '', collectorProfession: '',
+  collectorType: '', collectInterests: [], collectPrice: '', commissionInterest: '',
+  whySupportArtists: '', agreeCollector: false,
+
+  get totalSteps() { return this.role === 'artist' ? 4 : this.role === 'collector' ? 3 : 1; },
+  get passwordStrength() {
+    const p = this.signupPassword;
+    if (!p) return { level: 0, label: '', color: 'transparent', width: '0%' };
+    let score = 0;
+    if (p.length >= 6) score++;
+    if (p.length >= 10) score++;
+    if (/[A-Z]/.test(p)) score++;
+    if (/[0-9]/.test(p)) score++;
+    if (/[^A-Za-z0-9]/.test(p)) score++;
+    if (score <= 1) return { level: 1, label: 'Weak', color: '#d32f2f', width: '33%' };
+    if (score <= 3) return { level: 2, label: 'Fair', color: '#f9a825', width: '66%' };
+    return { level: 3, label: 'Strong', color: '#2e7d32', width: '100%' };
+  },
+  toggleArray(arr, val) {
+    const i = arr.indexOf(val);
+    i === -1 ? arr.push(val) : arr.splice(i, 1);
+  },
+  nextStep() {
+    if (this.step < this.totalSteps) this.step++;
+  },
+  prevStep() {
+    if (this.step > 1) this.step--;
+    else this.role = '';
+  },
+  chooseRole(r) {
+    this.role = r;
+    this.step = 1;
+  },
+  submitApplication() {
+    this.submitting = true;
+    setTimeout(() => { window.location.href = 'home.html'; }, 1200);
+  },
+  submitForm(formEl) {
+    let valid = true;
+    formEl.querySelectorAll('.form-input').forEach(input => {
+      const error = input.parentElement.querySelector('.form-error');
+      if (!input.checkValidity()) {
+        input.classList.add('invalid');
+        if (error) error.textContent = input.validationMessage;
+        valid = false;
+      } else {
+        input.classList.remove('invalid');
+        if (error) error.textContent = '';
+      }
+    });
+    if (!valid) return;
+    this.submitting = true;
+    setTimeout(() => { window.location.href = 'home.html'; }, 1000);
+  },
+  resetSignup() {
+    this.role = '';
+    this.step = 1;
+    this.submitting = false;
+  }
+}" :class="authModalOpen ? 'modal-open' : ''"
+   x-init="$watch('mode', () => { resetSignup(); })">
 
   <!-- Navigation -->
   <nav class="nav">
@@ -28,10 +106,15 @@
 
   <!-- Hero -->
   <section class="hero teaser-hero">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
     <img src="logo.png" alt="Create Bastrop" class="hero-logo">
     <h1>Showcase. Discover. Collect.</h1>
     <p>A community arts platform where Bastrop's artists showcase their work and collectors discover original pieces worth living with.</p>
   </section>
+
+  <hr class="section-divider">
 
   <!-- Restricted Section -->
   <section class="section section-alt restricted-container">
@@ -111,45 +194,421 @@
       </div>
 
       <!-- Log In Form -->
-      <form class="auth-form form-fade" x-show="mode === 'login'" @submit.prevent="window.location.href='home.html'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+      <form class="auth-form form-fade" x-show="mode === 'login'" @submit.prevent="submitForm($event.target)" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
         <h2 class="auth-title">Welcome back</h2>
         <p class="auth-subtitle">Sign in to unlock the collection.</p>
 
         <div class="form-group">
           <label for="login-email">Email Address</label>
           <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required>
+          <span class="form-error" role="alert"></span>
         </div>
-        
+
         <div class="form-group">
           <label for="login-password">Password</label>
           <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+          <span class="form-error" role="alert"></span>
+          <button type="button" class="forgot-password-link" @click="showForgotMsg = !showForgotMsg">Forgot password?</button>
+          <p class="forgot-password-msg" x-show="showForgotMsg" x-transition>Password reset coming soon. Contact <a href="mailto:hello@createbastrop.com">hello@createbastrop.com</a> for help.</p>
         </div>
 
-        <button type="submit" class="btn-cta auth-submit">Log In to Collection</button>
+        <button type="submit" class="btn-cta auth-submit" :disabled="submitting">
+          <span class="spinner" x-show="submitting"></span>
+          <span x-text="submitting ? 'Signing in...' : 'Log In to Collection'"></span>
+        </button>
       </form>
 
-      <!-- Sign Up Form -->
-      <form class="auth-form form-fade" x-show="mode === 'signup'" @submit.prevent="window.location.href='home.html'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-        <h2 class="auth-title">Create an account</h2>
-        <p class="auth-subtitle">Join collectors and artists in Bastrop.</p>
+      <!-- Sign Up / Application Flow -->
+      <div class="auth-form form-fade" x-show="mode === 'signup'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
 
-        <div class="form-group">
-          <label for="signup-name">Full Name</label>
-          <input type="text" id="signup-name" class="form-input" placeholder="Jane Doe" required>
-        </div>
+        <!-- Role Picker -->
+        <template x-if="!role">
+          <div class="role-picker">
+            <h2 class="auth-title">Join Create Bastrop</h2>
+            <p class="auth-subtitle">We welcome artists from all backgrounds and experience levels, and collectors who want to support them.</p>
+            <div class="role-cards">
+              <button class="role-card" @click="chooseRole('artist')">
+                <span class="role-icon">&#127912;</span>
+                <h3>I'm an Artist</h3>
+                <p>Showcase your work, connect with collectors, and grow as an artist.</p>
+              </button>
+              <button class="role-card" @click="chooseRole('collector')">
+                <span class="role-icon">&#128444;&#65039;</span>
+                <h3>I'm a Collector</h3>
+                <p>Discover curated artists, inquire about pieces, and support the community.</p>
+              </button>
+            </div>
+          </div>
+        </template>
 
-        <div class="form-group">
-          <label for="signup-email">Email Address</label>
-          <input type="email" id="signup-email" class="form-input" placeholder="you@example.com" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="signup-password">Password</label>
-          <input type="password" id="signup-password" class="form-input" placeholder="••••••••" required>
-        </div>
+        <!-- === ARTIST APPLICATION === -->
+        <template x-if="role === 'artist'">
+          <div>
+            <!-- Step indicator -->
+            <div class="step-indicator">
+              <template x-for="s in 4" :key="s">
+                <div class="step-dot" :class="{ active: step >= s, current: step === s }">
+                  <span x-text="s"></span>
+                </div>
+              </template>
+            </div>
 
-        <button type="submit" class="btn-cta auth-submit">Create Account</button>
-      </form>
+            <!-- Artist Step 1: Info -->
+            <div x-show="step === 1" x-transition>
+              <h2 class="auth-title">Artist Information</h2>
+              <p class="auth-subtitle">Tell us about yourself.</p>
+
+              <div class="form-group">
+                <label for="artist-name">Artist Name / Creative Name *</label>
+                <input type="text" id="artist-name" class="form-input" placeholder="Your name or creative alias" x-model="artistName" required>
+              </div>
+              <div class="form-group">
+                <label for="artist-email">Email Address *</label>
+                <input type="email" id="artist-email" class="form-input" placeholder="you@example.com" x-model="artistEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="artist-city">City &amp; Country *</label>
+                <input type="text" id="artist-city" class="form-input" placeholder="Bastrop, TX" x-model="artistCity" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="artist-website">Website <span class="form-optional">(optional)</span></label>
+                  <input type="url" id="artist-website" class="form-input" placeholder="https://..." x-model="artistWebsite">
+                </div>
+                <div class="form-group">
+                  <label for="artist-instagram">Instagram <span class="form-optional">(optional)</span></label>
+                  <input type="text" id="artist-instagram" class="form-input" placeholder="@handle" x-model="artistInstagram">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="artist-bio">Short Bio (3-5 sentences) *</label>
+                <textarea id="artist-bio" class="form-input form-textarea" rows="3" placeholder="Tell us about yourself and your artistic journey..." x-model="artistBio" required></textarea>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="nextStep()" :disabled="!artistName || !artistEmail || !artistCity || !artistBio">Next</button>
+              </div>
+            </div>
+
+            <!-- Artist Step 2: Practice -->
+            <div x-show="step === 2" x-transition>
+              <h2 class="auth-title">Artistic Practice</h2>
+              <p class="auth-subtitle">What kind of work do you create?</p>
+
+              <div class="form-group">
+                <p class="form-group-label">What type of artist are you? <span class="form-hint-inline">(check all that apply)</span></p>
+                <div class="checkbox-grid">
+                  <template x-for="t in ['Visual Artist','Painter','Illustrator','Photographer','Digital Artist','Sculptor','Fiber / Textile','Craft Artist','Musician','Poet / Writer','Mixed Media','Other']" :key="t">
+                    <label class="checkbox-pill" :class="{ checked: artistTypes.includes(t) }">
+                      <input type="checkbox" :value="t" @change="toggleArray(artistTypes, t)">
+                      <span x-text="t"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="artist-describe">How would you describe your work?</label>
+                <textarea id="artist-describe" class="form-input form-textarea" rows="3" placeholder="A short paragraph about your style, medium, and approach..." x-model="artistDescribe"></textarea>
+              </div>
+
+              <div class="form-group">
+                <p class="form-group-label">Themes in your work <span class="form-hint-inline">(check all that apply)</span></p>
+                <div class="checkbox-grid">
+                  <template x-for="t in ['Nature','Identity','Culture','Abstract','Storytelling','Emotional / Personal','Social Commentary','Experimental','Spiritual','Other']" :key="t">
+                    <label class="checkbox-pill" :class="{ checked: artistThemes.includes(t) }">
+                      <input type="checkbox" :value="t" @change="toggleArray(artistThemes, t)">
+                      <span x-text="t"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="nextStep()">Next</button>
+              </div>
+            </div>
+
+            <!-- Artist Step 3: Portfolio & Journey -->
+            <div x-show="step === 3" x-transition>
+              <h2 class="auth-title">Portfolio &amp; Journey</h2>
+              <p class="auth-subtitle">Share your work and where you are in your creative path.</p>
+
+              <div class="form-group">
+                <p class="form-group-label">Do you currently have a portfolio?</p>
+                <div class="radio-group">
+                  <label class="radio-pill" :class="{ checked: hasPortfolio === 'yes' }">
+                    <input type="radio" name="portfolio" value="yes" x-model="hasPortfolio">
+                    <span>Yes — I have a portfolio</span>
+                  </label>
+                  <label class="radio-pill" :class="{ checked: hasPortfolio === 'no' }">
+                    <input type="radio" name="portfolio" value="no" x-model="hasPortfolio">
+                    <span>Not yet — I'd love help building one</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group" x-show="hasPortfolio === 'yes'" x-transition>
+                <label for="portfolio-link">Portfolio Link</label>
+                <input type="url" id="portfolio-link" class="form-input" placeholder="Website, Instagram, Google Drive, etc." x-model="portfolioLink">
+              </div>
+
+              <div class="form-callout" x-show="hasPortfolio === 'no'" x-transition>
+                <strong>No worries — we're here to help.</strong>
+                <p>You can upload images of your work after joining and our team will help you build your portfolio.</p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="artist-medium">Medium <span class="form-optional">(optional)</span></label>
+                  <input type="text" id="artist-medium" class="form-input" placeholder="Painting, digital, etc." x-model="artistMedium">
+                </div>
+                <div class="form-group">
+                  <label for="artist-price">Price Range <span class="form-optional">(optional)</span></label>
+                  <select id="artist-price" class="form-input form-select" x-model="artistPrice">
+                    <option value="">Select...</option>
+                    <option>Under $100</option>
+                    <option>$100 – $500</option>
+                    <option>$500 – $1,000</option>
+                    <option>$1,000+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="form-group-label">Where are you in your journey?</p>
+                <div class="radio-group">
+                  <template x-for="j in ['Beginner','Emerging Artist','Mid-career','Established Artist','Prefer not to say']" :key="j">
+                    <label class="radio-pill" :class="{ checked: journeyLevel === j }">
+                      <input type="radio" name="journey" :value="j" x-model="journeyLevel">
+                      <span x-text="j"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="artist-inspire">What inspires your work? <span class="form-optional">(optional)</span></label>
+                <textarea id="artist-inspire" class="form-input form-textarea" rows="2" placeholder="Tell us what drives your creativity..." x-model="whyJoin"></textarea>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="nextStep()">Next</button>
+              </div>
+            </div>
+
+            <!-- Artist Step 4: Community & Agreement -->
+            <div x-show="step === 4" x-transition>
+              <h2 class="auth-title">Community &amp; Agreement</h2>
+              <p class="auth-subtitle">How would you like to be part of Create Bastrop?</p>
+
+              <div class="form-group">
+                <p class="form-group-label">How would you like to participate? <span class="form-hint-inline">(check all)</span></p>
+                <div class="checkbox-grid">
+                  <template x-for="p in ['Showcase my work','Sell artwork','Connect with collectors','Collaborate with artists','Participate in exhibitions','Teach / Share knowledge','Grow as an artist']" :key="p">
+                    <label class="checkbox-pill" :class="{ checked: participate.includes(p) }">
+                      <input type="checkbox" :value="p" @change="toggleArray(participate, p)">
+                      <span x-text="p"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="form-group-label">Would you like support in any of these areas? <span class="form-hint-inline">(check all)</span></p>
+                <div class="checkbox-grid">
+                  <template x-for="s in ['Building a portfolio','Writing my artist statement','Pricing my work','Presenting professionally','Growing as an artist','Connecting with collectors']" :key="s">
+                    <label class="checkbox-pill" :class="{ checked: support.includes(s) }">
+                      <input type="checkbox" :value="s" @change="toggleArray(support, s)">
+                      <span x-text="s"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-agreement">
+                <p class="agreement-intro">By submitting this application, you agree to:</p>
+                <ul class="agreement-list">
+                  <li>Keep your profile updated</li>
+                  <li>Engage respectfully in the community</li>
+                  <li>Allow the platform to showcase your work</li>
+                  <li>Understand that collector contact is mediated through the platform</li>
+                </ul>
+                <label class="checkbox-agreement">
+                  <input type="checkbox" x-model="agreeArtist">
+                  <span>I agree to the community guidelines</span>
+                </label>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="submitApplication()" :disabled="!agreeArtist || submitting">
+                  <span class="spinner" x-show="submitting"></span>
+                  <span x-text="submitting ? 'Submitting...' : 'Submit Application'"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- === COLLECTOR APPLICATION === -->
+        <template x-if="role === 'collector'">
+          <div>
+            <!-- Step indicator -->
+            <div class="step-indicator">
+              <template x-for="s in 3" :key="s">
+                <div class="step-dot" :class="{ active: step >= s, current: step === s }">
+                  <span x-text="s"></span>
+                </div>
+              </template>
+            </div>
+
+            <!-- Collector Step 1: Info -->
+            <div x-show="step === 1" x-transition>
+              <h2 class="auth-title">Collector Information</h2>
+              <p class="auth-subtitle">Tell us about yourself.</p>
+
+              <div class="form-group">
+                <label for="collector-name">Full Name *</label>
+                <input type="text" id="collector-name" class="form-input" placeholder="Your name" x-model="collectorName" required>
+              </div>
+              <div class="form-group">
+                <label for="collector-email">Email Address *</label>
+                <input type="email" id="collector-email" class="form-input" placeholder="you@example.com" x-model="collectorEmail" required>
+              </div>
+              <div class="form-group">
+                <label for="collector-city">City &amp; Country *</label>
+                <input type="text" id="collector-city" class="form-input" placeholder="Bastrop, TX" x-model="collectorCity" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="collector-website">Website <span class="form-optional">(optional)</span></label>
+                  <input type="url" id="collector-website" class="form-input" placeholder="https://..." x-model="collectorWebsite">
+                </div>
+                <div class="form-group">
+                  <label for="collector-instagram">Instagram <span class="form-optional">(optional)</span></label>
+                  <input type="text" id="collector-instagram" class="form-input" placeholder="@handle" x-model="collectorInstagram">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="collector-profession">Profession <span class="form-optional">(optional but recommended)</span></label>
+                <input type="text" id="collector-profession" class="form-input" placeholder="Your profession" x-model="collectorProfession">
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="nextStep()" :disabled="!collectorName || !collectorEmail || !collectorCity">Next</button>
+              </div>
+            </div>
+
+            <!-- Collector Step 2: Profile & Interests -->
+            <div x-show="step === 2" x-transition>
+              <h2 class="auth-title">Profile &amp; Interests</h2>
+              <p class="auth-subtitle">Help us match you with the right artists.</p>
+
+              <div class="form-group">
+                <p class="form-group-label">What best describes you?</p>
+                <div class="radio-group">
+                  <template x-for="t in ['First-time collector','Private collector','Interior designer','Art advisor','Corporate collector','Gallery / Institution','Other']" :key="t">
+                    <label class="radio-pill" :class="{ checked: collectorType === t }">
+                      <input type="radio" name="collectorType" :value="t" x-model="collectorType">
+                      <span x-text="t"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="form-group-label">What type of work interests you? <span class="form-hint-inline">(check all)</span></p>
+                <div class="checkbox-grid">
+                  <template x-for="t in ['Painting','Sculpture','Photography','Digital Art','Craft','Mixed Media','Textile','Music','Poetry','Other']" :key="t">
+                    <label class="checkbox-pill" :class="{ checked: collectInterests.includes(t) }">
+                      <input type="checkbox" :value="t" @change="toggleArray(collectInterests, t)">
+                      <span x-text="t"></span>
+                    </label>
+                  </template>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="collect-price">Price Range of Interest</label>
+                  <select id="collect-price" class="form-input form-select" x-model="collectPrice">
+                    <option value="">Select...</option>
+                    <option>Under $100</option>
+                    <option>$100 – $500</option>
+                    <option>$500 – $1,000</option>
+                    <option>$1,000 – $5,000</option>
+                    <option>$5,000+</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="commission-interest">Interested in commissions?</label>
+                  <select id="commission-interest" class="form-input form-select" x-model="commissionInterest">
+                    <option value="">Select...</option>
+                    <option>Yes</option>
+                    <option>Possibly</option>
+                    <option>Not at this time</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="nextStep()">Next</button>
+              </div>
+            </div>
+
+            <!-- Collector Step 3: Agreement -->
+            <div x-show="step === 3" x-transition>
+              <h2 class="auth-title">Membership &amp; Agreement</h2>
+              <p class="auth-subtitle">Join the collector community.</p>
+
+              <div class="collector-benefits">
+                <h4>As a member, you'll receive:</h4>
+                <ul>
+                  <li>Access to curated artists</li>
+                  <li>Early access to new artists and collections</li>
+                  <li>Commission opportunities</li>
+                  <li>Curated introductions</li>
+                  <li>Priority artwork inquiries</li>
+                  <li>Collector-only communication channel</li>
+                </ul>
+              </div>
+
+              <div class="form-group">
+                <label for="why-support">Why are you interested in supporting artists? <span class="form-optional">(optional)</span></label>
+                <textarea id="why-support" class="form-input form-textarea" rows="3" placeholder="Tell us what draws you to collecting and supporting artists..." x-model="whySupportArtists"></textarea>
+              </div>
+
+              <div class="form-agreement">
+                <p class="agreement-intro">By applying, you understand and agree that:</p>
+                <ul class="agreement-list">
+                  <li>Membership supports the artist community and platform</li>
+                  <li>Artist contact is facilitated through the platform</li>
+                  <li>The platform curates artists and collectors to maintain quality</li>
+                  <li>The platform reserves the right to approve or decline applications</li>
+                </ul>
+                <label class="checkbox-agreement">
+                  <input type="checkbox" x-model="agreeCollector">
+                  <span>I agree to the membership terms</span>
+                </label>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn-secondary" @click="prevStep()">Back</button>
+                <button type="button" class="btn-cta" @click="submitApplication()" :disabled="!agreeCollector || submitting">
+                  <span class="spinner" x-show="submitting"></span>
+                  <span x-text="submitting ? 'Submitting...' : 'Submit Application'"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
     </div>
   </div>
 

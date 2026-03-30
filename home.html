@@ -61,6 +61,9 @@
 
   <!-- Hero -->
   <section class="hero">
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
+    <div class="hero-shape"></div>
     <img src="logo.png" alt="Create Bastrop" class="hero-logo">
     <h1>Showcase. Discover. Collect.</h1>
     <p>A community arts platform where Bastrop's artists showcase their work and collectors discover original pieces worth living with.</p>
@@ -69,6 +72,8 @@
       <a href="#gallery" class="btn-secondary">Browse the Collection</a>
     </div>
   </section>
+
+  <hr class="section-divider">
 
   <!-- Spray Paint Banner -->
   <section class="spray-banner" aria-label="Partnership banner">
@@ -91,7 +96,7 @@
   <!-- Artists Section -->
   <section id="artists" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2>Meet Our Artists</h2>
         <p>Talented creatives from across Bastrop County and beyond</p>
       </div>
@@ -113,8 +118,9 @@
       </div>
 
       <div class="empty-state error-state" x-show="loadError">
-        <div class="icon">&#9888;&#65039;</div>
+        <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
       </div>
 
       <!-- Filter Pills -->
@@ -138,7 +144,6 @@
                    tabindex="0"
                    :aria-label="`Open details for ${artist.name}`"
                    @click="openArtist(artist)"
-                   onkeydown="return true;"
                    @keydown.enter.prevent="openArtist(artist)"
                    @keydown.space.prevent="openArtist(artist)">
             <!-- Photo or Placeholder -->
@@ -176,16 +181,19 @@
 
       <!-- Empty state -->
       <div class="empty-state" x-show="loaded && !loadError && filteredArtists.length === 0">
-        <div class="icon">&#127912;</div>
+        <div class="icon-wrap">&#127912;</div>
         <p>No artists found matching your search. Try a different keyword or filter.</p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="searchQuery = ''; artistFilter = 'all'">Clear Search &amp; Filters</button>
       </div>
     </div>
   </section>
 
+  <hr class="section-divider">
+
   <!-- Gallery Section -->
   <section id="gallery" class="section section-alt">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2>The Collection</h2>
         <p>Original work from Bastrop's artists — available for inquiry</p>
       </div>
@@ -196,8 +204,9 @@
       </div>
 
       <div class="empty-state error-state" x-show="loadError">
-        <div class="icon">&#9888;&#65039;</div>
+        <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
       </div>
 
       <!-- Filter Pills -->
@@ -220,7 +229,6 @@
                    tabindex="0"
                    :aria-label="`Open artwork ${piece.title} by ${piece.artistName}`"
                    @click="openLightbox(index)"
-                   onkeydown="return true;"
                    @keydown.enter.prevent="openLightbox(index)"
                    @keydown.space.prevent="openLightbox(index)">
             <template x-if="piece.image || piece.thumb">
@@ -244,7 +252,7 @@
 
       <!-- Empty state -->
       <div class="empty-state" x-show="loaded && !loadError && filteredGallery.length === 0">
-        <div class="icon">&#128444;&#65039;</div>
+        <div class="icon-wrap">&#128444;&#65039;</div>
         <p>No artwork found for this discipline. Check back soon!</p>
       </div>
 
@@ -257,10 +265,12 @@
     </div>
   </section>
 
+  <hr class="section-divider">
+
   <!-- Local Studios Section -->
   <section id="studios" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2>Local Studios</h2>
         <p>Creative spaces and businesses from our community</p>
       </div>
@@ -308,10 +318,12 @@
     </div>
   </section>
 
+  <hr class="section-divider">
+
   <!-- Events Section -->
   <section id="events" class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2>Events & Meetups</h2>
         <p>Connect, create, and celebrate together</p>
       </div>
@@ -322,8 +334,9 @@
       </div>
 
       <div class="empty-state error-state" x-show="loadError">
-        <div class="icon">&#9888;&#65039;</div>
+        <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
       </div>
 
       <!-- Tabs -->
@@ -362,7 +375,7 @@
 
       <!-- Empty state -->
       <div class="empty-state" x-show="loaded && !loadError && currentEvents.length === 0">
-        <div class="icon" x-text="eventTab === 'upcoming' ? '📅' : '📚'"></div>
+        <div class="icon-wrap" x-text="eventTab === 'upcoming' ? '📅' : '📚'"></div>
         <p x-text="eventTab === 'upcoming'
           ? 'No upcoming events right now. Check back soon or suggest one!'
           : 'No past events to show yet.'"></p>
@@ -370,14 +383,16 @@
     </div>
   </section>
 
+  <hr class="section-divider">
+
   <!-- About Section -->
   <section id="about" class="section section-alt">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <h2>About Create Bastrop</h2>
       </div>
 
-      <div class="mission-text">
+      <div class="mission-text reveal">
         <p>Create Bastrop is a community arts platform where artists showcase their work and collectors discover original pieces. We believe every artist deserves a digital stage — and every collector deserves direct access to the people behind the work.</p>
         <p>Our mission is simple: <strong>connect Bastrop's artists with the people who want to live with their art.</strong></p>
       </div>
