@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://createbastrop.com/sitemap.xml

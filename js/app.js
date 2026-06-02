@@ -26,31 +26,47 @@ const PLACEHOLDER_COLORS = [
   '#E63228', '#F28A1F', '#5BBD2B', '#29ABE2', '#D94F8A', '#2D3A8C',
 ];
 
-function getDisciplineColor(id) {
-  const d = DISCIPLINES.find(d => d.id === id);
-  return d ? d.color : 'orange';
-}
-
 function getInitials(name) {
   return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
 }
 
-function getPlaceholderColor(id) {
+// Stable djb2-style string hash (shared by the placeholder helpers)
+function hashString(id) {
   let hash = 0;
   for (let i = 0; i < id.length; i++) {
     hash = id.charCodeAt(i) + ((hash << 5) - hash);
   }
-  return PLACEHOLDER_COLORS[Math.abs(hash) % PLACEHOLDER_COLORS.length];
+  return Math.abs(hash);
+}
+
+function getPlaceholderColor(id) {
+  return PLACEHOLDER_COLORS[hashString(id) % PLACEHOLDER_COLORS.length];
 }
 
 // Gallery placeholder aspects
 const GALLERY_ASPECTS = ['', 'landscape', 'square'];
 function getPlaceholderAspect(id) {
-  let hash = 0;
-  for (let i = 0; i < id.length; i++) {
-    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+  return GALLERY_ASPECTS[hashString(id) % GALLERY_ASPECTS.length];
+}
+
+// Today's date as YYYY-MM-DD in LOCAL time, so event partitioning matches
+// the locally-parsed date chips (avoids a UTC-vs-local midnight boundary bug).
+function todayLocalStr() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+// Only allow http/https URLs from JSON data to reach an href, so a
+// malicious "javascript:" value can never become a clickable script link.
+function safeUrl(u) {
+  if (!u) return '#';
+  try {
+    const parsed = new URL(u, window.location.origin);
+    return (parsed.protocol === 'https:' || parsed.protocol === 'http:') ? parsed.href : '#';
+  } catch {
+    return '#';
   }
-  return GALLERY_ASPECTS[Math.abs(hash) % GALLERY_ASPECTS.length];
 }
 
 // Emoji per discipline for placeholders
@@ -125,23 +141,34 @@ document.addEventListener('alpine:init', () => {
 
     // Initialize
     async init() {
-      try {
-        const [artists, gallery, events, partners] = await Promise.all([
-          fetchJson('data/artists.json'),
-          fetchJson('data/gallery.json'),
-          fetchJson('data/events.json'),
-          fetchJson('data/partners.json'),
-        ]);
-        this.artists = artists;
-        this.gallery = gallery;
-        this.events = events;
-        this.partners = partners;
-        this.loaded = true;
-      } catch (e) {
-        console.error('Failed to load data:', e);
+      // Load each dataset independently so one missing/renamed file degrades
+      // only its own section to an empty state instead of nuking the whole site.
+      const sources = {
+        artists: 'data/artists.json',
+        gallery: 'data/gallery.json',
+        events: 'data/events.json',
+        partners: 'data/partners.json',
+      };
+      const keys = Object.keys(sources);
+      const results = await Promise.allSettled(keys.map(k => fetchJson(sources[k])));
+
+      let failures = 0;
+      results.forEach((res, i) => {
+        const key = keys[i];
+        if (res.status === 'fulfilled' && Array.isArray(res.value)) {
+          this[key] = res.value;
+        } else {
+          failures++;
+          console.error(`Failed to load ${sources[key]}:`, res.reason || 'expected an array');
+          this[key] = [];
+        }
+      });
+
+      // Surface the global error banner only if EVERY dataset failed.
+      if (failures === keys.length) {
         this.loadError = 'We could not load the community data right now. Please try again shortly.';
-        this.loaded = true;
       }
+      this.loaded = true;
 
       // Set up Intersection Observer for active nav
       this.$nextTick(() => this.setupNavObserver());
@@ -156,6 +183,21 @@ document.addEventListener('alpine:init', () => {
         if (e.key === 'ArrowLeft') this.prevLightbox();
         if (e.key === 'ArrowRight') this.nextLightbox();
       });
+
+      // Close the mobile menu (and release the scroll lock) if the viewport
+      // grows past the mobile breakpoint while the menu is open.
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && this.mobileMenuOpen) this.closeMobileMenu();
+      });
+    },
+
+    // Single source of truth for the body scroll lock: it's on iff any
+    // overlay is open. Replaces the four divergent ad-hoc guards.
+    syncScrollLock() {
+      document.body.classList.toggle(
+        'modal-open',
+        this.lightboxOpen || !!this.selectedArtist || this.mobileMenuOpen
+      );
     },
 
     // --- Computed / Getters ---
@@ -182,14 +224,14 @@ document.addEventListener('alpine:init', () => {
     },
 
     get upcomingEvents() {
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayLocalStr();
       return this.events
         .filter(e => e.date >= today)
         .sort((a, b) => a.date.localeCompare(b.date));
     },
 
     get pastEvents() {
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayLocalStr();
       return this.events
         .filter(e => e.date < today)
         .sort((a, b) => b.date.localeCompare(a.date));
@@ -221,8 +263,9 @@ document.addEventListener('alpine:init', () => {
     },
 
     openArtist(artist) {
+      this._lastFocused = document.activeElement;
       this.selectedArtist = artist;
-      document.body.classList.add('modal-open');
+      this.syncScrollLock();
       this.$nextTick(() => this.setupFocusTrap('.artist-modal-overlay'));
     },
 
@@ -232,15 +275,15 @@ document.addEventListener('alpine:init', () => {
         document.removeEventListener('keydown', this._focusTrapHandler);
         this._focusTrapHandler = null;
       }
-      if (!this.lightboxOpen && !this.mobileMenuOpen) {
-        document.body.classList.remove('modal-open');
-      }
+      this.syncScrollLock();
+      this.restoreFocus();
     },
 
     openLightbox(index) {
+      this._lastFocused = document.activeElement;
       this.lightboxIndex = index;
       this.lightboxOpen = true;
-      document.body.classList.add('modal-open');
+      this.syncScrollLock();
       this.$nextTick(() => {
         this.setupFocusTrap('.lightbox');
         this.setupLightboxSwipe();
@@ -253,18 +296,29 @@ document.addEventListener('alpine:init', () => {
         document.removeEventListener('keydown', this._focusTrapHandler);
         this._focusTrapHandler = null;
       }
-      if (!this.selectedArtist && !this.mobileMenuOpen) {
-        document.body.classList.remove('modal-open');
+      this.teardownLightboxSwipe();
+      this.syncScrollLock();
+      this.restoreFocus();
+    },
+
+    // Return focus to whatever triggered the overlay (WCAG 2.4.3)
+    restoreFocus() {
+      const el = this._lastFocused;
+      this._lastFocused = null;
+      if (el && typeof el.focus === 'function') {
+        this.$nextTick(() => el.focus());
       }
     },
 
     prevLightbox() {
       const items = this.filteredGallery;
+      if (!items.length) return;
       this.lightboxIndex = (this.lightboxIndex - 1 + items.length) % items.length;
     },
 
     nextLightbox() {
       const items = this.filteredGallery;
+      if (!items.length) return;
       this.lightboxIndex = (this.lightboxIndex + 1) % items.length;
     },
 
@@ -274,14 +328,12 @@ document.addEventListener('alpine:init', () => {
 
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
-      document.body.classList.toggle('modal-open', this.mobileMenuOpen || this.lightboxOpen || !!this.selectedArtist);
+      this.syncScrollLock();
     },
 
     closeMobileMenu() {
       this.mobileMenuOpen = false;
-      if (!this.lightboxOpen && !this.selectedArtist) {
-        document.body.classList.remove('modal-open');
-      }
+      this.syncScrollLock();
     },
 
     // Intersection Observer for active nav highlighting
@@ -324,11 +376,11 @@ document.addEventListener('alpine:init', () => {
     },
 
     // Helper methods exposed to template
-    getDisciplineColor,
     getInitials,
     getPlaceholderColor,
     getPlaceholderAspect,
     formatEventDate,
+    safeUrl,
     getDisciplineEmoji(discipline) {
       return DISCIPLINE_EMOJI[discipline] || '\uD83C\uDFA8';
     },
@@ -372,11 +424,9 @@ document.addEventListener('alpine:init', () => {
       let touchEndX = 0;
       const self = this;
 
-      // Remove old listeners if any
-      if (this._swipeTouchStart) {
-        lightbox.removeEventListener('touchstart', this._swipeTouchStart);
-        lightbox.removeEventListener('touchend', this._swipeTouchEnd);
-      }
+      // Remove any stale listeners before re-binding
+      this.teardownLightboxSwipe();
+      this._swipeEl = lightbox;
 
       this._swipeTouchStart = (e) => {
         touchStartX = e.changedTouches[0].screenX;
@@ -395,6 +445,16 @@ document.addEventListener('alpine:init', () => {
 
       lightbox.addEventListener('touchstart', this._swipeTouchStart, { passive: true });
       lightbox.addEventListener('touchend', this._swipeTouchEnd, { passive: true });
+    },
+
+    teardownLightboxSwipe() {
+      if (this._swipeEl && this._swipeTouchStart) {
+        this._swipeEl.removeEventListener('touchstart', this._swipeTouchStart);
+        this._swipeEl.removeEventListener('touchend', this._swipeTouchEnd);
+      }
+      this._swipeEl = null;
+      this._swipeTouchStart = null;
+      this._swipeTouchEnd = null;
     },
 
     scrollToTop() {

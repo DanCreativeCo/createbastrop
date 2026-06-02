@@ -5,23 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Bastrop — Community Arts Initiative</title>
   <meta name="description" content="Where Bastrop's artists showcase and collectors discover original work. Browse the collection, meet the artists, and inquire about pieces.">
+  <link rel="canonical" href="https://createbastrop.com/home.html">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+
+  <!-- Open Graph / social sharing -->
   <meta property="og:title" content="Create Bastrop — Showcase. Discover. Collect.">
   <meta property="og:description" content="Where Bastrop's artists showcase and collectors discover original work. Browse the collection and inquire about pieces.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/home.html">
+  <meta property="og:site_name" content="Create Bastrop">
+  <meta property="og:image" content="https://createbastrop.com/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Create Bastrop — Showcase. Discover. Collect.">
+  <meta name="twitter:description" content="Where Bastrop's artists showcase and collectors discover original work.">
+  <meta name="twitter:image" content="https://createbastrop.com/assets/logo/og-image.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@500;700;800&display=swap" rel="stylesheet">
 
+  <!-- Preload hero logo (LCP) -->
+  <link rel="preload" as="image" href="assets/logo/logo-640.webp" type="image/webp">
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
 
-  <!-- Alpine.js -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-  <script src="js/app.js"></script>
+  <!-- App component must register its alpine:init listener BEFORE Alpine
+       auto-starts, so it is loaded ahead of Alpine (both deferred → run in order). -->
+  <script defer src="js/app.js"></script>
+  <!-- Alpine.js (SRI-pinned) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous"></script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Create Bastrop",
+    "url": "https://createbastrop.com/",
+    "logo": "https://createbastrop.com/assets/logo/og-image.png",
+    "description": "A community arts platform where Bastrop's artists showcase their work and collectors discover original pieces.",
+    "email": "hello@createbastrop.com",
+    "areaServed": "Bastrop, TX"
+  }
+  </script>
 </head>
 <body x-data="community">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <noscript>
+    <div style="background:#5C3317;color:#FFF9F0;padding:1rem 1.5rem;text-align:center;font-family:sans-serif;">
+      This site needs JavaScript to load the artist collection. Please enable JavaScript, or email
+      <a href="mailto:hello@createbastrop.com" style="color:#F7E034;">hello@createbastrop.com</a>.
+    </div>
+  </noscript>
 
   <!-- Mobile Overlay -->
   <div class="mobile-overlay"
@@ -32,7 +76,12 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="container">
-      <a href="#"><img src="logo.png" alt="Create Bastrop" class="nav-logo"></a>
+      <a href="home.html" aria-label="Create Bastrop home">
+        <picture>
+          <source type="image/webp" srcset="assets/logo/logo-96.webp 1x, assets/logo/logo-192.webp 2x">
+          <img src="assets/logo/logo-96.webp" alt="Create Bastrop" class="nav-logo" width="48" height="48">
+        </picture>
+      </a>
 
       <ul class="nav-links" id="primary-navigation" :class="{ open: mobileMenuOpen }">
         <li><a href="#artists" :class="{ active: activeSection === 'artists' }" @click="closeMobileMenu()">Artists</a></li>
@@ -40,7 +89,7 @@
         <li><a href="#events" :class="{ active: activeSection === 'events' }" @click="closeMobileMenu()">Events</a></li>
         <li><a href="#about" :class="{ active: activeSection === 'about' }" @click="closeMobileMenu()">About</a></li>
         <li>
-          <a href="https://forms.google.com" target="_blank" rel="noopener" class="btn-cta" @click="closeMobileMenu()">
+          <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta" @click="closeMobileMenu()">
             Submit Your Art
           </a>
         </li>
@@ -59,12 +108,14 @@
     </div>
   </nav>
 
+  <main id="main">
+
   <!-- Hero -->
   <section class="hero">
     <div class="hero-shape"></div>
     <div class="hero-shape"></div>
     <div class="hero-shape"></div>
-    <img src="logo.png" alt="Create Bastrop" class="hero-logo">
+    <img src="assets/logo/logo-640.webp" alt="" class="hero-logo" width="320" height="320" fetchpriority="high">
     <h1>Showcase. Discover. Collect.</h1>
     <p>A community arts platform where Bastrop's artists showcase their work and collectors discover original pieces worth living with.</p>
     <div class="hero-buttons">
@@ -117,7 +168,7 @@
         <p>Loading artist profiles...</p>
       </div>
 
-      <div class="empty-state error-state" x-show="loadError">
+      <div class="empty-state error-state" x-show="loadError" role="alert" aria-live="assertive">
         <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
         <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
@@ -148,7 +199,7 @@
                    @keydown.space.prevent="openArtist(artist)">
             <!-- Photo or Placeholder -->
             <template x-if="artist.photo">
-              <img :src="artist.photo" :alt="artist.name" class="artist-photo" loading="lazy">
+              <img :src="artist.photo" :alt="artist.name" class="artist-photo" loading="lazy" decoding="async" width="100" height="100">
             </template>
             <template x-if="!artist.photo">
               <div class="artist-photo-placeholder"
@@ -169,7 +220,7 @@
 
             <div class="artist-links" @click.stop>
               <template x-if="artist.website">
-                <a :href="artist.website" target="_blank" rel="noopener" title="Website" :aria-label="`${artist.name} website`">&#127760;</a>
+                <a :href="safeUrl(artist.website)" target="_blank" rel="noopener" title="Website" :aria-label="`${artist.name} website`">&#127760;</a>
               </template>
               <template x-if="artist.instagram">
                 <a :href="'https://instagram.com/' + artist.instagram" target="_blank" rel="noopener" title="Instagram" :aria-label="`${artist.name} Instagram`">&#128247;</a>
@@ -203,7 +254,7 @@
         <p>Loading gallery pieces...</p>
       </div>
 
-      <div class="empty-state error-state" x-show="loadError">
+      <div class="empty-state error-state" x-show="loadError" role="alert" aria-live="assertive">
         <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
         <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
@@ -253,7 +304,9 @@
       <!-- Empty state -->
       <div class="empty-state" x-show="loaded && !loadError && filteredGallery.length === 0">
         <div class="icon-wrap">&#128444;&#65039;</div>
-        <p>No artwork found for this discipline. Check back soon!</p>
+        <p x-text="gallery.length === 0
+          ? 'The Collection is launching soon — artwork is being added. Check back shortly!'
+          : 'No artwork found for this discipline. Try a different filter.'"></p>
       </div>
 
       <!-- CTA Banner -->
@@ -275,10 +328,26 @@
         <p>Creative spaces and businesses from our community</p>
       </div>
 
+      <div class="loading-state" x-show="!loaded && !loadError">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Loading local studios...</p>
+      </div>
+
+      <div class="empty-state error-state" x-show="loadError" role="alert" aria-live="assertive">
+        <div class="icon-wrap">&#9888;&#65039;</div>
+        <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
+      </div>
+
+      <div class="empty-state" x-show="loaded && !loadError && partners.length === 0">
+        <div class="icon-wrap">&#127970;</div>
+        <p>No local studios listed yet. Check back soon!</p>
+      </div>
+
       <div class="studios-grid" x-show="loaded && !loadError && partners.length > 0">
         <template x-for="partner in partners" :key="partner.id">
           <article class="studio-card card-animate">
-            <div class="studio-carousel" x-data="{ current: 0 }" x-init="setInterval(() => { current = (current + 1) % partner.images.length }, 4000)">
+            <div class="studio-carousel" x-data="{ current: 0 }" x-init="if (partner.images.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setInterval(() => { current = (current + 1) % partner.images.length }, 4000) }">
               <template x-for="(img, i) in partner.images" :key="img">
                 <img :src="img"
                      :alt="partner.name"
@@ -302,7 +371,7 @@
 
               <div class="studio-links">
                 <template x-if="partner.website">
-                  <a :href="partner.website" target="_blank" rel="noopener" class="btn-cta">Visit Website</a>
+                  <a :href="safeUrl(partner.website)" target="_blank" rel="noopener" class="btn-cta">Visit Website</a>
                 </template>
                 <template x-if="partner.instagram">
                   <a :href="'https://instagram.com/' + partner.instagram" target="_blank" rel="noopener" class="studio-social" title="Instagram">&#128247; <span x-text="'@' + partner.instagram"></span></a>
@@ -333,7 +402,7 @@
         <p>Loading events...</p>
       </div>
 
-      <div class="empty-state error-state" x-show="loadError">
+      <div class="empty-state error-state" x-show="loadError" role="alert" aria-live="assertive">
         <div class="icon-wrap">&#9888;&#65039;</div>
         <p x-text="loadError"></p>
         <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
@@ -366,7 +435,7 @@
               </div>
               <p x-text="event.description"></p>
               <template x-if="event.link">
-                <a :href="event.link" target="_blank" rel="noopener" class="event-link">Learn more &rarr;</a>
+                <a :href="safeUrl(event.link)" target="_blank" rel="noopener" class="event-link">Learn more &rarr;</a>
               </template>
             </div>
           </div>
@@ -403,7 +472,7 @@
           <h3>For Artists</h3>
           <p>Showcase your work to collectors and art lovers. All creative disciplines welcome — painting, sculpture, photography, textiles, and more.</p>
           <div class="about-card-actions">
-            <a href="https://forms.google.com" target="_blank" rel="noopener" class="btn-cta">Submit Your Art</a>
+            <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta">Submit Your Art</a>
           </div>
         </div>
         <div class="about-card">
@@ -426,10 +495,12 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <img src="logo.png" alt="Create Bastrop" class="footer-logo">
+      <img src="assets/logo/logo-192.webp" alt="" class="footer-logo" width="96" height="96">
       <div class="footer-links">
         <a href="#artists">Artists</a>
         <a href="#gallery">Collection</a>
@@ -477,7 +548,7 @@
 
         <div class="artist-links artist-modal-links">
           <template x-if="selectedArtist.website">
-            <a :href="selectedArtist.website" target="_blank" rel="noopener" title="Website">&#127760; Website</a>
+            <a :href="safeUrl(selectedArtist.website)" target="_blank" rel="noopener" title="Website">&#127760; Website</a>
           </template>
           <template x-if="selectedArtist.instagram">
             <a :href="'https://instagram.com/' + selectedArtist.instagram" target="_blank" rel="noopener" title="Instagram">&#128247; Instagram</a>
