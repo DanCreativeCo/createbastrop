@@ -13,3 +13,10 @@ Thumbs.db
 
 # Node (if added later)
 node_modules/
+
+# Firebase deploy cache
+.firebase/
+
+# Agent tooling
+.agents/
+skills-lock.json

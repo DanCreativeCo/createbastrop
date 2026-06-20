@@ -164,6 +164,19 @@ document.addEventListener('alpine:init', () => {
         }
       });
 
+      // Normalize incoming records so a hand-edited JSON file that omits an
+      // optional field can never crash a render or a filter. Content is edited
+      // by non-developers, so every array/string the templates read must exist.
+      this.artists = this.artists.map(a => ({
+        ...a,
+        bio: a.bio || '',
+        disciplines: Array.isArray(a.disciplines) ? a.disciplines : [],
+      }));
+      this.partners = this.partners.map(p => ({
+        ...p,
+        images: Array.isArray(p.images) ? p.images : [],
+      }));
+
       // Surface the global error banner only if EVERY dataset failed.
       if (failures === keys.length) {
         this.loadError = 'We could not load the community data right now. Please try again shortly.';
