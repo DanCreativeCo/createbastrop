@@ -27,77 +27,73 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="preload" as="image" href="assets/logo/logo-640.webp" type="image/webp">
+  <link rel="preload" as="image" href="artists/djully/djully.webp" type="image/webp">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/design.css">
 </head>
-<body>
+<body class="welcome-page">
 
   <a href="#main" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="nav">
     <div class="container teaser-nav">
-      <a href="index.html" aria-label="Create Bastrop home">
-        <picture>
-          <source type="image/webp" srcset="assets/logo/logo-96.webp 1x, assets/logo/logo-192.webp 2x">
-          <img src="assets/logo/logo-96.webp" alt="Create Bastrop" class="nav-logo" width="48" height="48">
-        </picture>
+<a href="index.html" class="brand" aria-label="Create Bastrop home">
+        <img src="assets/logo/logo-96.webp" alt="" width="52" height="52">
+        <span>Create Bastrop<small>A community arts initiative</small></span>
       </a>
       <div class="teaser-actions">
-        <a href="home.html" class="btn-cta">Explore the Site</a>
+        <a href="home.html#artists" class="nav-text">The artists</a>
+        <a href="home.html#about" class="nav-text">Our story</a>
+        <a href="home.html" class="btn-cta">Explore the Site <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </nav>
 
   <main id="main">
 
-  <!-- Hero -->
-  <section class="hero teaser-hero">
-    <div class="hero-shape"></div>
-    <div class="hero-shape"></div>
-    <div class="hero-shape"></div>
-    <img src="assets/logo/logo-640.webp" alt="" class="hero-logo" width="320" height="320" fetchpriority="high">
-    <h1>Showcase. Discover. Collect.</h1>
-    <p>A community arts platform where Bastrop's artists showcase their work and collectors discover original pieces worth living with.</p>
-    <div class="hero-buttons">
-      <a href="home.html#artists" class="btn-cta">Meet the Artists</a>
-      <a href="home.html#gallery" class="btn-secondary">Browse the Collection</a>
+  <!-- Community introduction -->
+  <section class="hero editorial-hero" aria-labelledby="hero-title">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <span class="eyebrow location-label">Rooted in Bastrop, Texas</span>
+        <h1 id="hero-title">A little local.<br>A lot of <em>soul.</em></h1>
+        <p>Meet the makers. Find something that moves you. Discover the creativity growing right here in our community.</p>
+        <div class="hero-buttons">
+          <a href="home.html#artists" class="btn-cta">Meet the Artists <span aria-hidden="true">↗</span></a>
+          <a href="home.html#gallery" class="text-link">Explore the collection <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-footnote"><span class="tiny-star" aria-hidden="true">✳</span> Local artists. Original perspectives. Open to everyone.</div>
+      </div>
+      <figure class="hero-feature">
+        <div class="feature-image-wrap">
+          <img src="artists/djully/djully.webp" alt="Djully Marques standing in front of a colorful mural" width="2400" height="1800" fetchpriority="high" class="feature-image">
+          <span class="feature-stamp" aria-hidden="true">Made with<br><em>heart.</em><span>BASTROP, TX</span></span>
+        </div>
+        <figcaption><span><small>In our creative community</small>Djully Marques <span class="caption-discipline">/ Artist &amp; educator</span></span><a href="home.html#artists" aria-label="Meet Djully and the artists of Create Bastrop">↗</a></figcaption>
+      </figure>
     </div>
   </section>
 
-  <hr class="section-divider">
-
-  <!-- The Collection -->
-  <section class="section section-alt">
+<section class="community-strip" aria-label="Our creative community">
+    <div class="container"><p>Small town. <em>Big creative energy.</em></p><div><span>Art</span><span aria-hidden="true">✳</span><span>People</span><span aria-hidden="true">✳</span><span>Possibility</span></div></div>
+  </section>
+  <section class="section welcome-explore">
     <div class="container">
-      <div class="section-header">
-        <h2>The Collection</h2>
-        <p>Original work from Bastrop's artists — open for everyone to explore</p>
-      </div>
-      <div class="mission-text">
-        <p>Browse the full collection, meet the artists behind the work, and inquire about any piece that speaks to you. No account required — the community is open.</p>
-      </div>
-      <div style="text-align: center; margin-top: 2.5rem;">
-        <a href="home.html#gallery" class="btn-cta">View the Collection</a>
+      <div class="section-header"><span class="eyebrow">A place for creative connection</span><h2>Find your kind of inspiration.</h2><p>Behind every piece is a person. Start with a little curiosity.</p></div>
+      <div class="discovery-grid">
+        <a class="discovery-card" href="home.html#artists"><span class="discovery-number">01 / The people</span><h3>Meet the <br><em>makers.</em></h3><p>Get to know the artists bringing their own perspective to Bastrop.</p><span class="discovery-link">Discover the artists <span aria-hidden="true">↗</span></span></a>
+        <a class="discovery-card" href="home.html#gallery"><span class="discovery-number">02 / The work</span><h3>Art to <br><em>live with.</em></h3><p>Our collection is taking shape. Explore what’s next and connect with an artist.</p><span class="discovery-link">Explore the collection <span aria-hidden="true">↗</span></span></a>
+        <a class="discovery-card" href="home.html#studios"><span class="discovery-number">03 / The community</span><h3>Make room <br><em>to create.</em></h3><p>Find local studios, creative spaces, and a place to try something new.</p><span class="discovery-link">Find local studios <span aria-hidden="true">↗</span></span></a>
       </div>
     </div>
   </section>
-
-  <!-- About Section -->
-  <section class="section" style="background: var(--cream); padding-bottom: 8rem;">
-    <div class="container">
-      <div class="section-header">
-        <h2>About Create Bastrop</h2>
-      </div>
-      <div class="mission-text">
-        <p>Create Bastrop is a community arts platform where artists showcase their work and collectors discover original pieces. We believe every artist deserves a digital stage — and every collector deserves direct access to the people behind the work.</p>
-        <p>Our mission is simple: <strong>connect Bastrop's artists with the people who want to live with their art.</strong></p>
-      </div>
-      <div style="text-align: center; margin-top: 3rem;">
-         <a href="home.html" class="btn-cta" style="font-size: 1.1rem; padding: 1rem 2rem;">Explore Create Bastrop</a>
-      </div>
+  <section class="welcome-story section">
+    <div class="container story-layout">
+      <div><span class="eyebrow">The idea behind Create Bastrop</span><h2>Good things happen<br>when art brings<br><em>us together.</em></h2></div>
+      <div class="story-copy"><p>Every artist deserves a place to be seen. Every art lover deserves a connection to the people behind the work.</p><p>We’re here to bring the two together — and make a little more room for creativity in Bastrop.</p><a href="home.html#about" class="btn-cta-light">Get to know us <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 
@@ -105,10 +101,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container" style="text-align: center;">
-      <p class="footer-copy" style="margin: 0;">&copy; 2026 Create Bastrop &bull; by Bastrop Code Studio</p>
-    </div>
+    <div class="container footer-layout"><a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a><div><div class="footer-links"><a href="home.html#artists">Artists</a><a href="home.html#studios">Studios</a><a href="mailto:hello@createbastrop.com">Say hello ↗</a></div><p class="footer-copy">&copy; 2026 Create Bastrop · by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p></div></div>
   </footer>
-
 </body>
 </html>
