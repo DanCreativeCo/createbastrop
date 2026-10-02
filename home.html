@@ -31,8 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Preload featured artist photo -->
-  <link rel="preload" as="image" href="artists/djully/djully.webp" type="image/webp">
-
+  
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/design.css">
@@ -111,31 +110,19 @@
 
   <main id="main">
 
-  <!-- Community introduction -->
-  <section class="hero editorial-hero" aria-labelledby="hero-title">
-    <div class="container hero-layout">
-      <div class="hero-copy">
-        <span class="eyebrow location-label">Rooted in Bastrop, Texas</span>
-        <h1 id="hero-title">A little local.<br>A lot of <em>soul.</em></h1>
-        <p>Meet the makers. Find something that moves you. Discover the creativity growing right here in our community.</p>
-        <div class="hero-buttons">
-          <a href="#artists" class="btn-cta">Meet the Artists <span aria-hidden="true">↗</span></a>
-          <a href="#gallery" class="text-link">Explore the collection <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="hero-footnote"><span class="tiny-star" aria-hidden="true">✳</span> Local artists. Original perspectives. Open to everyone.</div>
-      </div>
-      <figure class="hero-feature">
-        <div class="feature-image-wrap">
-          <img src="artists/djully/djully.webp" alt="Djully Marques standing in front of a colorful mural" width="2400" height="1800" fetchpriority="high" class="feature-image">
-          <span class="feature-stamp" aria-hidden="true">Made with<br><em>heart.</em><span>BASTROP, TX</span></span>
-        </div>
-        <figcaption><span><small>In our creative community</small>Djully Marques <span class="caption-discipline">/ Artist &amp; educator</span></span><a href="#artists" aria-label="Meet Djully and the artists of Create Bastrop">↗</a></figcaption>
-      </figure>
+  <!-- Directory introduction -->
+  <section class="directory-intro" aria-labelledby="hero-title">
+    <div class="container">
+      <span class="eyebrow location-label">The Create Bastrop directory</span>
+      <h1 id="hero-title">Everything creative in Bastrop,<br> <em>in one place.</em></h1>
+      <p>Artists, original work, studios, and the gatherings that bring them together — all made right here.</p>
+      <nav class="directory-index" aria-label="Directory sections">
+        <a href="#artists"><small>01</small><strong>Artists</strong><span x-text="loaded ? `${artists.length} ${artists.length === 1 ? 'maker' : 'makers'}` : '—'"></span></a>
+        <a href="#gallery"><small>02</small><strong>Collection</strong><span x-text="loaded ? (gallery.length ? `${gallery.length} pieces` : 'Coming soon') : '—'"></span></a>
+        <a href="#studios"><small>03</small><strong>Studios</strong><span x-text="loaded ? `${partners.length} ${partners.length === 1 ? 'space' : 'spaces'}` : '—'"></span></a>
+        <a href="#events"><small>04</small><strong>Events</strong><span x-text="loaded ? (upcomingEvents.length ? `${upcomingEvents.length} upcoming` : 'Nothing scheduled') : '—'"></span></a>
+      </nav>
     </div>
-  </section>
-
-<section class="community-strip" aria-label="Our creative community">
-    <div class="container"><p>Small town. <em>Big creative energy.</em></p><div><span>Art</span><span aria-hidden="true">✳</span><span>People</span><span aria-hidden="true">✳</span><span>Possibility</span></div></div>
   </section>
   <div class="partnership-note container"><span>A creative collaboration</span><p>COR Art Studio <span aria-hidden="true">×</span> Bastrop Code Studio</p></div>
 
@@ -213,7 +200,7 @@
               </template>
             </div>
 
-            <p class="artist-bio" x-text="artist.bio"></p>
+            <p class="artist-bio" :class="{ 'is-pending': !artist.bio }" x-text="artist.bio || 'Profile coming soon.'"></p>
             <span class="artist-card-prompt">Meet the artist <span aria-hidden="true">↗</span></span>
 
             <div class="artist-links" @click.stop>
@@ -306,15 +293,16 @@
         <div class="empty-art-frame" aria-hidden="true"><span>✳</span></div>
         <h3 x-cloak x-show="gallery.length === 0">Something original is on its way.</h3>
         <p x-text="gallery.length === 0
-          ? 'We’re gathering work from our creative community. Come back soon to discover your next favorite piece.'
+          ? 'We’re gathering work from Bastrop’s creative community. Are you a local artist? Help shape the collection — we’d love to see what you’re making.'
           : 'No artwork found for this discipline. Try a different filter.'"></p>
+        <a x-show="gallery.length === 0" href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta">Submit Your Art <span aria-hidden="true">↗</span></a>
       </div>
 
       <!-- CTA Banner -->
-      <div class="cta-banner">
-        <h3 x-text="gallery.length ? 'Found something you love?' : 'Your work belongs here.'"></h3>
-        <p x-text="gallery.length ? 'Reach out and we’ll connect you with the artist behind the work.' : 'Are you a local artist? Help shape the collection. We’d love to see what you’re creating.'"></p>
-        <a :href="gallery.length ? 'mailto:hello@createbastrop.com?subject=Collection%20Inquiry' : 'mailto:hello@createbastrop.com?subject=Art%20Submission'" class="btn-cta-light" x-text="gallery.length ? 'Inquire by Email ↗' : 'Submit Your Art ↗'"></a>
+      <div class="cta-banner" x-cloak x-show="gallery.length">
+        <h3>Found something you love?</h3>
+        <p>Reach out and we’ll connect you with the artist behind the work.</p>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry" class="btn-cta-light">Inquire by Email ↗</a>
       </div>
     </div>
   </section>
@@ -447,7 +435,7 @@
 
       <!-- Empty state -->
       <div class="empty-state" x-cloak x-show="loaded && !loadError && currentEvents.length === 0">
-        <div class="icon-wrap" x-text="eventTab === 'upcoming' ? '📅' : '📚'"></div>
+        <div class="empty-art-frame" aria-hidden="true"><span>✳</span></div>
         <p x-text="eventTab === 'upcoming'
           ? 'No upcoming events right now. Check back soon or suggest one!'
           : 'No past events to show yet.'"></p>
@@ -503,8 +491,9 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
+    <div class="container footer-layout">
       <a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a>
+      <div>
       <div class="footer-links">
         <a href="#artists">Artists</a>
         <a href="#gallery">Collection</a>
@@ -514,6 +503,7 @@
       </div>
       <p class="footer-copy">&copy; 2026 Create Bastrop &bull; by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p>
       <button class="back-to-top" @click="scrollToTop()">&uarr; Back to top</button>
+      </div>
     </div>
   </footer>
 
