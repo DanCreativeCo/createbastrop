@@ -2,17 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create Bastrop</title>
-  <meta name="robots" content="noindex">
-  <link rel="canonical" href="https://createbastrop.com/artists.html">
-  <!-- The directory used to be one long page; send old links (home.html#gallery etc.) to their new page.
-       location.replace keeps this page out of history, so Back still works. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Bastrop — Community Arts Initiative</title>
+  <meta name="description" content="Everything creative in Bastrop, in one place: artists, original work, studios, and the gatherings that bring them together.">
+  <!-- The directory used to be one long page; send old section links (home.html#gallery etc.) to their new page. -->
   <script>
     var pages = { artists: 'artists.html', gallery: 'collection.html', studios: 'studios.html', events: 'events.html', about: 'about.html' };
-    location.replace(pages[location.hash.slice(1)] || 'artists.html');
+    if (pages[location.hash.slice(1)]) location.replace(pages[location.hash.slice(1)]);
   </script>
+  <link rel="canonical" href="https://createbastrop.com/home.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:title" content="Create Bastrop — Community Arts Initiative">
+  <meta property="og:description" content="Everything creative in Bastrop, in one place: artists, original work, studios, and the gatherings that bring them together.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/home.html">
+  <meta property="og:site_name" content="Create Bastrop">
+  <meta property="og:image" content="https://createbastrop.com/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Create Bastrop — Community Arts Initiative">
+  <meta name="twitter:description" content="Everything creative in Bastrop, in one place: artists, original work, studios, and the gatherings that bring them together.">
+  <meta name="twitter:image" content="https://createbastrop.com/assets/logo/og-image.png">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/design.css">
+
+  <!-- App component must register its alpine:init listener BEFORE Alpine
+       auto-starts, so it is loaded ahead of Alpine (both deferred → run in order). -->
+  <script defer src="js/app.js"></script>
+  <!-- Alpine.js (SRI-pinned) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous"></script>
 </head>
-<body>
-  <p><a href="artists.html">Continue to Create Bastrop</a></p>
+<body x-data="community">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <noscript>
+    <div style="background:#5C3317;color:#FFF9F0;padding:1rem 1.5rem;text-align:center;font-family:sans-serif;">
+      This site needs JavaScript to load the artist collection. Please enable JavaScript, or email
+      <a href="mailto:hello@createbastrop.com" style="color:#F7E034;">hello@createbastrop.com</a>.
+    </div>
+  </noscript>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" x-cloak
+       :class="{ open: mobileMenuOpen }"
+       aria-hidden="true"
+       @click="closeMobileMenu()"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="Create Bastrop home">
+        <img src="assets/logo/logo-96.webp" alt="" width="52" height="52">
+        <span>Create Bastrop<small>A community arts initiative</small></span>
+      </a>
+
+      <ul class="nav-links" id="primary-navigation" :class="{ open: mobileMenuOpen }">
+        <li><a href="artists.html" @click="closeMobileMenu()">Artists</a></li>
+        <li><a href="collection.html" @click="closeMobileMenu()">Collection</a></li>
+        <li><a href="studios.html" @click="closeMobileMenu()">Studios</a></li>
+        <li><a href="events.html" @click="closeMobileMenu()">Events</a></li>
+        <li><a href="about.html" @click="closeMobileMenu()">About</a></li>
+        <li>
+          <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta" @click="closeMobileMenu()">
+            Submit Your Art
+          </a>
+        </li>
+      </ul>
+
+      <button class="hamburger"
+              :class="{ open: mobileMenuOpen }"
+              @click="toggleMobileMenu()"
+              @keydown.escape.window="closeMobileMenu()"
+              :aria-expanded="mobileMenuOpen.toString()"
+              aria-controls="primary-navigation"
+              aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- Directory introduction -->
+  <section class="directory-intro" aria-labelledby="hero-title">
+    <div class="container">
+      <span class="eyebrow location-label">The Create Bastrop directory</span>
+      <h1 id="hero-title">Everything creative in Bastrop,<br> <em>in one place.</em></h1>
+      <p>Artists, original work, studios, and the gatherings that bring them together — all made right here.</p>
+      <nav class="directory-index" aria-label="Directory sections">
+        <a href="artists.html"><small>01</small><strong>Artists</strong><span x-text="loaded ? `${artists.length} ${artists.length === 1 ? 'maker' : 'makers'}` : '—'"></span></a>
+        <a href="collection.html"><small>02</small><strong>Collection</strong><span x-text="loaded ? (gallery.length ? `${gallery.length} pieces` : 'Coming soon') : '—'"></span></a>
+        <a href="studios.html"><small>03</small><strong>Studios</strong><span x-text="loaded ? `${partners.length} ${partners.length === 1 ? 'space' : 'spaces'}` : '—'"></span></a>
+        <a href="events.html"><small>04</small><strong>Events</strong><span x-text="loaded ? (upcomingEvents.length ? `${upcomingEvents.length} upcoming` : 'Nothing scheduled') : '—'"></span></a>
+      </nav>
+    </div>
+  </section>
+  <div class="partnership-note container"><span>A creative collaboration</span><p>COR Art Studio <span aria-hidden="true">×</span> Bastrop Code Studio</p></div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-layout">
+      <a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a>
+      <div>
+      <div class="footer-links">
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="studios.html">Studios</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry">Inquire</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Create Bastrop &bull; by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p>
+      <button class="back-to-top" @click="scrollToTop()">&uarr; Back to top</button>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
