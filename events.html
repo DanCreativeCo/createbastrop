@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events &amp; Meetups — Create Bastrop</title>
+  <meta name="description" content="Art walks, open mics, workshops, and showcases. Meet Bastrop's artists in person.">
+  <link rel="canonical" href="https://createbastrop.com/events.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:title" content="Events &amp; Meetups — Create Bastrop">
+  <meta property="og:description" content="Art walks, open mics, workshops, and showcases. Meet Bastrop's artists in person.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/events.html">
+  <meta property="og:site_name" content="Create Bastrop">
+  <meta property="og:image" content="https://createbastrop.com/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Events &amp; Meetups — Create Bastrop">
+  <meta name="twitter:description" content="Art walks, open mics, workshops, and showcases. Meet Bastrop's artists in person.">
+  <meta name="twitter:image" content="https://createbastrop.com/assets/logo/og-image.png">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/design.css">
+
+  <!-- App component must register its alpine:init listener BEFORE Alpine
+       auto-starts, so it is loaded ahead of Alpine (both deferred → run in order). -->
+  <script defer src="js/app.js"></script>
+  <!-- Alpine.js (SRI-pinned) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous"></script>
+</head>
+<body x-data="community">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <noscript>
+    <div style="background:#5C3317;color:#FFF9F0;padding:1rem 1.5rem;text-align:center;font-family:sans-serif;">
+      This site needs JavaScript to load the artist collection. Please enable JavaScript, or email
+      <a href="mailto:hello@createbastrop.com" style="color:#F7E034;">hello@createbastrop.com</a>.
+    </div>
+  </noscript>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" x-cloak
+       :class="{ open: mobileMenuOpen }"
+       aria-hidden="true"
+       @click="closeMobileMenu()"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="Create Bastrop home">
+        <img src="assets/logo/logo-96.webp" alt="" width="52" height="52">
+        <span>Create Bastrop<small>A community arts initiative</small></span>
+      </a>
+
+      <ul class="nav-links" id="primary-navigation" :class="{ open: mobileMenuOpen }">
+        <li><a href="artists.html" @click="closeMobileMenu()">Artists</a></li>
+        <li><a href="collection.html" @click="closeMobileMenu()">Collection</a></li>
+        <li><a href="studios.html" @click="closeMobileMenu()">Studios</a></li>
+        <li><a href="events.html" class="active" aria-current="page" @click="closeMobileMenu()">Events</a></li>
+        <li><a href="about.html" @click="closeMobileMenu()">About</a></li>
+        <li>
+          <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta" @click="closeMobileMenu()">
+            Submit Your Art
+          </a>
+        </li>
+      </ul>
+
+      <button class="hamburger"
+              :class="{ open: mobileMenuOpen }"
+              @click="toggleMobileMenu()"
+              @keydown.escape.window="closeMobileMenu()"
+              :aria-expanded="mobileMenuOpen.toString()"
+              aria-controls="primary-navigation"
+              aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- Events Section -->
+  <section id="events" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">04 / Come together</span>
+        <h1>Events &amp; <em>meetups.</em></h1>
+        <p>Connect, create, and celebrate together</p>
+      </div>
+
+      <div class="loading-state" x-cloak x-show="!loaded && !loadError">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Loading events...</p>
+      </div>
+
+      <div class="empty-state error-state" x-cloak x-show="loadError" role="alert" aria-live="assertive">
+        <div class="icon-wrap">&#9888;&#65039;</div>
+        <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="event-tabs" x-cloak x-show="loaded && !loadError">
+        <button class="event-tab" :aria-pressed="eventTab === 'upcoming'" :class="{ active: eventTab === 'upcoming' }" @click="eventTab = 'upcoming'">
+          Upcoming <span x-cloak x-show="upcomingEvents.length" x-text="'(' + upcomingEvents.length + ')'"></span>
+        </button>
+        <button class="event-tab" :aria-pressed="eventTab === 'past'" :class="{ active: eventTab === 'past' }" @click="eventTab = 'past'">
+          Past <span x-cloak x-show="pastEvents.length" x-text="'(' + pastEvents.length + ')'"></span>
+        </button>
+      </div>
+
+      <!-- Event List -->
+      <div class="event-list" x-cloak x-show="loaded && !loadError">
+        <template x-for="event in currentEvents" :key="event.id">
+          <div class="event-card card-animate">
+            <div class="event-date-chip">
+              <span class="month" x-text="formatEventDate(event.date).month"></span>
+              <span class="day" x-text="formatEventDate(event.date).day"></span>
+            </div>
+            <div class="event-details">
+              <span class="event-category" :class="`event-category-${event.category}`" x-text="event.category"></span>
+              <h3 x-text="event.title">Event Title</h3>
+              <div class="event-meta">
+                <span x-text="event.time"></span>
+                <span x-text="event.location"></span>
+              </div>
+              <p x-text="event.description"></p>
+              <template x-if="event.link">
+                <a :href="safeUrl(event.link)" target="_blank" rel="noopener" class="event-link">Learn more &rarr;</a>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" x-cloak x-show="loaded && !loadError && currentEvents.length === 0">
+        <div class="empty-art-frame" aria-hidden="true"><span>✳</span></div>
+        <p x-text="eventTab === 'upcoming'
+          ? 'No upcoming events right now. Check back soon or suggest one!'
+          : 'No past events to show yet.'"></p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-layout">
+      <a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a>
+      <div>
+      <div class="footer-links">
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="studios.html">Studios</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry">Inquire</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Create Bastrop &bull; by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p>
+      <button class="back-to-top" @click="scrollToTop()">&uarr; Back to top</button>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

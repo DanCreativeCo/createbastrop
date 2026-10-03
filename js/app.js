@@ -132,9 +132,6 @@ document.addEventListener('alpine:init', () => {
     // Mobile menu
     mobileMenuOpen: false,
 
-    // Active nav section
-    activeSection: '',
-
     // Loading
     loaded: false,
     loadError: '',
@@ -169,9 +166,6 @@ document.addEventListener('alpine:init', () => {
         this.loadError = 'We could not load the community data right now. Please try again shortly.';
       }
       this.loaded = true;
-
-      // Set up Intersection Observer for active nav
-      this.$nextTick(() => this.setupNavObserver());
 
       // Set up scroll reveal animations
       this.$nextTick(() => this.setupScrollReveal());
@@ -334,25 +328,6 @@ document.addEventListener('alpine:init', () => {
     closeMobileMenu() {
       this.mobileMenuOpen = false;
       this.syncScrollLock();
-    },
-
-    // Intersection Observer for active nav highlighting
-    setupNavObserver() {
-      const sections = document.querySelectorAll('.section[id]');
-      if (!sections.length) return;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            this.activeSection = entry.target.id;
-          }
-        });
-      }, {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0,
-      });
-
-      sections.forEach(s => observer.observe(s));
     },
 
     // Scroll reveal animation observer

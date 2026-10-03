@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artists — Create Bastrop</title>
+  <meta name="description" content="Meet the painters, designers, and makers of Bastrop County, and get to know the people behind the work.">
+  <link rel="canonical" href="https://createbastrop.com/artists.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:title" content="Artists — Create Bastrop">
+  <meta property="og:description" content="Meet the painters, designers, and makers of Bastrop County, and get to know the people behind the work.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/artists.html">
+  <meta property="og:site_name" content="Create Bastrop">
+  <meta property="og:image" content="https://createbastrop.com/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Artists — Create Bastrop">
+  <meta name="twitter:description" content="Meet the painters, designers, and makers of Bastrop County, and get to know the people behind the work.">
+  <meta name="twitter:image" content="https://createbastrop.com/assets/logo/og-image.png">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/design.css">
+
+  <!-- App component must register its alpine:init listener BEFORE Alpine
+       auto-starts, so it is loaded ahead of Alpine (both deferred → run in order). -->
+  <script defer src="js/app.js"></script>
+  <!-- Alpine.js (SRI-pinned) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous"></script>
+</head>
+<body x-data="community">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <noscript>
+    <div style="background:#5C3317;color:#FFF9F0;padding:1rem 1.5rem;text-align:center;font-family:sans-serif;">
+      This site needs JavaScript to load the artist collection. Please enable JavaScript, or email
+      <a href="mailto:hello@createbastrop.com" style="color:#F7E034;">hello@createbastrop.com</a>.
+    </div>
+  </noscript>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" x-cloak
+       :class="{ open: mobileMenuOpen }"
+       aria-hidden="true"
+       @click="closeMobileMenu()"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="Create Bastrop home">
+        <img src="assets/logo/logo-96.webp" alt="" width="52" height="52">
+        <span>Create Bastrop<small>A community arts initiative</small></span>
+      </a>
+
+      <ul class="nav-links" id="primary-navigation" :class="{ open: mobileMenuOpen }">
+        <li><a href="artists.html" class="active" aria-current="page" @click="closeMobileMenu()">Artists</a></li>
+        <li><a href="collection.html" @click="closeMobileMenu()">Collection</a></li>
+        <li><a href="studios.html" @click="closeMobileMenu()">Studios</a></li>
+        <li><a href="events.html" @click="closeMobileMenu()">Events</a></li>
+        <li><a href="about.html" @click="closeMobileMenu()">About</a></li>
+        <li>
+          <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta" @click="closeMobileMenu()">
+            Submit Your Art
+          </a>
+        </li>
+      </ul>
+
+      <button class="hamburger"
+              :class="{ open: mobileMenuOpen }"
+              @click="toggleMobileMenu()"
+              @keydown.escape.window="closeMobileMenu()"
+              :aria-expanded="mobileMenuOpen.toString()"
+              aria-controls="primary-navigation"
+              aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- Artists Section -->
+  <section id="artists" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">01 / The people</span>
+        <h1>Meet our <em>artists.</em></h1>
+        <p>Talented creatives from across Bastrop County and beyond</p>
+      </div>
+
+      <!-- Search -->
+      <div class="search-wrap">
+        <label for="artist-search" class="sr-only">Search artists</label>
+        <span class="search-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></span>
+        <input id="artist-search"
+               type="text"
+               class="search-input"
+               placeholder="Find an artist, discipline, or inspiration…"
+               x-model.debounce.300ms="searchQuery">
+      </div>
+
+      <div class="loading-state" x-cloak x-show="!loaded && !loadError">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Loading artist profiles...</p>
+      </div>
+
+      <div class="empty-state error-state" x-cloak x-show="loadError" role="alert" aria-live="assertive">
+        <div class="icon-wrap">&#9888;&#65039;</div>
+        <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-bar" x-cloak x-show="loaded && !loadError">
+        <button class="filter-pill" :aria-pressed="artistFilter === 'all'" :class="{ active: artistFilter === 'all' }" @click="setArtistFilter('all')">All</button>
+        <template x-for="d in activeDisciplinesArtists" :key="d.id">
+          <button class="filter-pill"
+                  :data-color="d.color"
+                  :aria-pressed="artistFilter === d.id"
+                  :class="{ active: artistFilter === d.id }"
+                  @click="setArtistFilter(d.id)"
+                  x-text="d.label"></button>
+        </template>
+      </div>
+
+      <!-- Artist Grid -->
+      <div class="artist-grid" x-cloak x-show="loaded && !loadError">
+        <template x-for="artist in filteredArtists" :key="artist.id">
+          <div class="artist-card card-animate"
+                   :class="{ featured: artist.featured }"
+                   role="button"
+                   tabindex="0"
+                   :aria-label="`Open details for ${artist.name}`"
+                   @click="openArtist(artist)"
+                   @keydown.enter.prevent="openArtist(artist)"
+                   @keydown.space.prevent="openArtist(artist)">
+            <!-- Photo or Placeholder -->
+            <template x-if="artist.photo">
+              <img :src="artist.photo" :alt="artist.name" class="artist-photo" loading="lazy" decoding="async" width="100" height="100">
+            </template>
+            <template x-if="!artist.photo">
+              <div class="artist-photo-placeholder"
+                   :style="`background: ${getPlaceholderColor(artist.id)}`"
+                   x-text="getInitials(artist.name)"></div>
+            </template>
+
+            <h3 x-text="artist.name">Artist Name</h3>
+            <div class="location" x-text="artist.location"></div>
+
+            <div class="discipline-badges">
+              <template x-for="disc in artist.disciplines" :key="disc">
+                <span class="badge" :class="`badge-${disc}`" x-text="disc"></span>
+              </template>
+            </div>
+
+            <p class="artist-bio" :class="{ 'is-pending': !artist.bio }" x-text="artist.bio || 'Profile coming soon.'"></p>
+            <span class="artist-card-prompt">Meet the artist <span aria-hidden="true">↗</span></span>
+
+            <div class="artist-links" @click.stop>
+              <template x-if="artist.website">
+                <a :href="safeUrl(artist.website)" target="_blank" rel="noopener" title="Website" :aria-label="`${artist.name} website`">Website ↗</a>
+              </template>
+              <template x-if="artist.instagram">
+                <a :href="'https://instagram.com/' + artist.instagram" target="_blank" rel="noopener" title="Instagram" :aria-label="`${artist.name} Instagram`">Instagram ↗</a>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" x-cloak x-show="loaded && !loadError && filteredArtists.length === 0">
+        <div class="icon-wrap">&#127912;</div>
+        <p>No artists found matching your search. Try a different keyword or filter.</p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="searchQuery = ''; artistFilter = 'all'">Clear Search &amp; Filters</button>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-layout">
+      <a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a>
+      <div>
+      <div class="footer-links">
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="studios.html">Studios</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry">Inquire</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Create Bastrop &bull; by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p>
+      <button class="back-to-top" @click="scrollToTop()">&uarr; Back to top</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Artist Detail Modal -->
+  <template x-if="selectedArtist">
+    <div class="artist-modal-overlay"
+         x-cloak x-show="selectedArtist"
+         x-transition.opacity
+         role="dialog"
+         aria-modal="true"
+         :aria-labelledby="selectedArtist ? `artist-modal-title-${selectedArtist.id}` : null"
+         @click.self="closeArtist()"
+         @keydown.escape.window="closeArtist()">
+      <div class="artist-modal" @click.stop>
+        <button class="modal-close" @click="closeArtist()" aria-label="Close artist details">&times;</button>
+
+        <template x-if="selectedArtist.photo">
+          <img :src="selectedArtist.photo" :alt="selectedArtist.name" class="artist-photo artist-modal-photo">
+        </template>
+        <template x-if="!selectedArtist.photo">
+          <div class="artist-photo-placeholder artist-modal-photo artist-modal-placeholder"
+               :style="`background: ${getPlaceholderColor(selectedArtist.id)}`"
+               x-text="getInitials(selectedArtist.name)"></div>
+        </template>
+
+        <h3 class="artist-modal-title" :id="`artist-modal-title-${selectedArtist.id}`" x-text="selectedArtist.name">Artist Details</h3>
+        <div class="location" x-text="selectedArtist.location"></div>
+
+        <div class="discipline-badges artist-modal-badges">
+          <template x-for="disc in selectedArtist.disciplines" :key="disc">
+            <span class="badge" :class="`badge-${disc}`" x-text="disc"></span>
+          </template>
+        </div>
+
+        <p class="artist-modal-bio" x-text="selectedArtist.bio"></p>
+
+        <div class="artist-links artist-modal-links">
+          <template x-if="selectedArtist.website">
+            <a :href="safeUrl(selectedArtist.website)" target="_blank" rel="noopener" title="Website">Website ↗</a>
+          </template>
+          <template x-if="selectedArtist.instagram">
+            <a :href="'https://instagram.com/' + selectedArtist.instagram" target="_blank" rel="noopener" title="Instagram">Instagram ↗</a>
+          </template>
+        </div>
+
+        <!-- Show this artist's gallery pieces -->
+        <template x-if="gallery.filter(g => g.artistId === selectedArtist.id).length > 0">
+          <div class="artist-modal-work">
+            <h4>Work in the Gallery</h4>
+            <template x-for="piece in gallery.filter(g => g.artistId === selectedArtist.id)" :key="piece.id">
+              <div class="artist-modal-work-item">
+                <strong x-text="piece.title"></strong>
+                <span class="artist-modal-work-meta" x-text="' — ' + piece.medium + ', ' + piece.year"></span>
+              </div>
+            </template>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collection — Create Bastrop</title>
+  <meta name="description" content="Original work by Bastrop's artists, available for inquiry directly from the people who made it.">
+  <link rel="canonical" href="https://createbastrop.com/collection.html">
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:title" content="The Collection — Create Bastrop">
+  <meta property="og:description" content="Original work by Bastrop's artists, available for inquiry directly from the people who made it.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/collection.html">
+  <meta property="og:site_name" content="Create Bastrop">
+  <meta property="og:image" content="https://createbastrop.com/assets/logo/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Collection — Create Bastrop">
+  <meta name="twitter:description" content="Original work by Bastrop's artists, available for inquiry directly from the people who made it.">
+  <meta name="twitter:image" content="https://createbastrop.com/assets/logo/og-image.png">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/design.css">
+
+  <!-- App component must register its alpine:init listener BEFORE Alpine
+       auto-starts, so it is loaded ahead of Alpine (both deferred → run in order). -->
+  <script defer src="js/app.js"></script>
+  <!-- Alpine.js (SRI-pinned) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js" integrity="sha384-X9kJyAubVxnP0hcA+AMMs21U445qsnqhnUF8EBlEpP3a42Kh/JwWjlv2ZcvGfphb" crossorigin="anonymous"></script>
+</head>
+<body x-data="community">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <noscript>
+    <div style="background:#5C3317;color:#FFF9F0;padding:1rem 1.5rem;text-align:center;font-family:sans-serif;">
+      This site needs JavaScript to load the artist collection. Please enable JavaScript, or email
+      <a href="mailto:hello@createbastrop.com" style="color:#F7E034;">hello@createbastrop.com</a>.
+    </div>
+  </noscript>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" x-cloak
+       :class="{ open: mobileMenuOpen }"
+       aria-hidden="true"
+       @click="closeMobileMenu()"></div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="Create Bastrop home">
+        <img src="assets/logo/logo-96.webp" alt="" width="52" height="52">
+        <span>Create Bastrop<small>A community arts initiative</small></span>
+      </a>
+
+      <ul class="nav-links" id="primary-navigation" :class="{ open: mobileMenuOpen }">
+        <li><a href="artists.html" @click="closeMobileMenu()">Artists</a></li>
+        <li><a href="collection.html" class="active" aria-current="page" @click="closeMobileMenu()">Collection</a></li>
+        <li><a href="studios.html" @click="closeMobileMenu()">Studios</a></li>
+        <li><a href="events.html" @click="closeMobileMenu()">Events</a></li>
+        <li><a href="about.html" @click="closeMobileMenu()">About</a></li>
+        <li>
+          <a href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta" @click="closeMobileMenu()">
+            Submit Your Art
+          </a>
+        </li>
+      </ul>
+
+      <button class="hamburger"
+              :class="{ open: mobileMenuOpen }"
+              @click="toggleMobileMenu()"
+              @keydown.escape.window="closeMobileMenu()"
+              :aria-expanded="mobileMenuOpen.toString()"
+              aria-controls="primary-navigation"
+              aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">02 / The work</span>
+        <h1>The <em>collection.</em></h1>
+        <p x-text="gallery.length ? 'Original work from Bastrop’s artists — available for inquiry' : 'Original perspectives. A collection in the making.'"></p>
+      </div>
+
+      <div class="loading-state" x-cloak x-show="!loaded && !loadError">
+        <div class="loading-spinner" aria-hidden="true"></div>
+        <p>Loading gallery pieces...</p>
+      </div>
+
+      <div class="empty-state error-state" x-cloak x-show="loadError" role="alert" aria-live="assertive">
+        <div class="icon-wrap">&#9888;&#65039;</div>
+        <p x-text="loadError"></p>
+        <button class="btn-secondary" style="margin-top: 1rem;" @click="location.reload()">Try Again</button>
+      </div>
+
+      <!-- Filter Pills -->
+      <div class="filter-bar" x-cloak x-show="loaded && !loadError && gallery.length > 0">
+        <button class="filter-pill" :aria-pressed="galleryFilter === 'all'" :class="{ active: galleryFilter === 'all' }" @click="setGalleryFilter('all')">All</button>
+        <template x-for="d in activeDisciplinesGallery" :key="d.id">
+          <button class="filter-pill"
+                  :data-color="d.color"
+                  :aria-pressed="galleryFilter === d.id"
+                  :class="{ active: galleryFilter === d.id }"
+                  @click="setGalleryFilter(d.id)"
+                  x-text="d.label"></button>
+        </template>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" x-cloak x-show="loaded && !loadError">
+        <template x-for="(piece, index) in filteredGallery" :key="piece.id">
+          <div class="gallery-item card-animate"
+                   role="button"
+                   tabindex="0"
+                   :aria-label="`Open artwork ${piece.title} by ${piece.artistName}`"
+                   @click="openLightbox(index)"
+                   @keydown.enter.prevent="openLightbox(index)"
+                   @keydown.space.prevent="openLightbox(index)">
+            <template x-if="piece.image || piece.thumb">
+              <img :src="piece.thumb || piece.image" :alt="piece.title" loading="lazy">
+            </template>
+            <template x-if="!piece.image && !piece.thumb">
+              <div class="gallery-placeholder"
+                   :class="getPlaceholderAspect(piece.id)"
+                   :style="`background: linear-gradient(135deg, ${getPlaceholderColor(piece.id)}22, ${getPlaceholderColor(piece.id)}44)`"
+                   x-text="getDisciplineEmoji(piece.discipline)">
+              </div>
+            </template>
+            <div class="gallery-overlay">
+              <h4 x-text="piece.title">Artwork Title</h4>
+              <p x-text="piece.artistName"></p>
+              <span class="gallery-inquire-tag">Available — Inquire</span>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state" x-cloak x-show="loaded && !loadError && filteredGallery.length === 0">
+        <div class="empty-art-frame" aria-hidden="true"><span>✳</span></div>
+        <h3 x-cloak x-show="gallery.length === 0">Something original is on its way.</h3>
+        <p x-text="gallery.length === 0
+          ? 'We’re gathering work from Bastrop’s creative community. Are you a local artist? Help shape the collection — we’d love to see what you’re making.'
+          : 'No artwork found for this discipline. Try a different filter.'"></p>
+        <a x-show="gallery.length === 0" href="mailto:hello@createbastrop.com?subject=Art%20Submission" class="btn-cta">Submit Your Art <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <!-- CTA Banner -->
+      <div class="cta-banner" x-cloak x-show="gallery.length">
+        <h3>Found something you love?</h3>
+        <p>Reach out and we’ll connect you with the artist behind the work.</p>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry" class="btn-cta-light">Inquire by Email ↗</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-layout">
+      <a href="index.html" class="footer-wordmark">Create Bastrop<span>Showcase. Discover. Collect.</span></a>
+      <div>
+      <div class="footer-links">
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="studios.html">Studios</a>
+        <a href="events.html">Events</a>
+        <a href="about.html">About</a>
+        <a href="mailto:hello@createbastrop.com?subject=Collection%20Inquiry">Inquire</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Create Bastrop &bull; by <a href="https://bastropcode.com" target="_blank" rel="noopener">Bastrop Code Studio</a></p>
+      <button class="back-to-top" @click="scrollToTop()">&uarr; Back to top</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <template x-if="lightboxOpen && lightboxItem">
+    <div class="lightbox"
+         x-cloak x-show="lightboxOpen"
+         x-transition.opacity
+         role="dialog"
+         aria-modal="true"
+         :aria-labelledby="lightboxItem ? `lightbox-title-${lightboxItem.id}` : null"
+         @click.self="closeLightbox()">
+      <button class="lightbox-close" @click="closeLightbox()" aria-label="Close gallery view">&times;</button>
+      <button class="lightbox-nav lightbox-prev" @click="prevLightbox()" aria-label="Previous artwork">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" @click="nextLightbox()" aria-label="Next artwork">&#8250;</button>
+
+      <div class="lightbox-content">
+        <template x-if="lightboxItem.image">
+          <img :src="lightboxItem.image" :alt="lightboxItem.title">
+        </template>
+        <template x-if="!lightboxItem.image">
+          <div class="gallery-placeholder lightbox-placeholder"
+               :style="`background: linear-gradient(135deg, ${getPlaceholderColor(lightboxItem.id)}33, ${getPlaceholderColor(lightboxItem.id)}66)`"
+               x-text="getDisciplineEmoji(lightboxItem.discipline)">
+          </div>
+        </template>
+
+        <div class="lightbox-info">
+          <h3 :id="`lightbox-title-${lightboxItem.id}`" x-text="lightboxItem.title">Artwork Details</h3>
+          <p>
+            <span class="artist-link" x-text="lightboxItem.artistName"></span>
+            <span x-text="' &bull; ' + lightboxItem.medium + ', ' + lightboxItem.year"></span>
+          </p>
+          <p class="lightbox-description" x-text="lightboxItem.description"></p>
+          <a class="btn-inquire"
+             :href="'mailto:hello@createbastrop.com?subject=Inquiry: ' + encodeURIComponent(lightboxItem.title) + ' by ' + encodeURIComponent(lightboxItem.artistName)"
+             @click.stop>
+            Inquire About This Piece
+          </a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+</body>
+</html>
