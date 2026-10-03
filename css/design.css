@@ -30,9 +30,21 @@
   --fs-ui: 13px;
   --fs-body: 15px;
   --fs-lead: 16px;
+  /* Spectrum, pulled from the rainbow-tree logo. Marigold carries ink text
+     and reads as text on the dark sections; cobalt carries white text.
+     The rest are decorative only (swashes, borders, dots, tints). */
+  --marigold: #f2b134;
+  --sp-pink: #e2577f;
+  --cobalt: #3a55c4;
+  --sky: #3aa6cf;
+  --leaf: #5fae45;
+  --sp-orange: #ee8a2a;
+  --sp-red: #dd4b34;
+  --blush: #f8e3d8;
+  --brush: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 24' preserveAspectRatio='none'%3E%3Cpath d='M4 8c20-4 46-5 69-3s45 3 67 1 38-4 55-2c4 1 4 8 0 10-19 3-39 3-60 4s-46 3-70 3-40 0-60-2c-5-1-6-9-1-11z'/%3E%3C/svg%3E");
 }
 [x-cloak] { display: none !important; }
-body { font-size: 15px; animation: none; }
+body { font-size: var(--fs-body); animation: none; }
 .container { padding-inline: clamp(1.25rem, 4.5vw, 4rem); }
 a { color: var(--rust); }
 a:hover { color: var(--ink); }
@@ -164,12 +176,12 @@ h1, h2, h3 { font-weight: 500; }
 .event-meta { font-size: var(--fs-ui); }
 #about { background: var(--ink); color: var(--cream); }
 #about .section-header h2, #about h3 { color: var(--cream); }
-#about .eyebrow { color: #dfac88; }
+#about .eyebrow { color: var(--marigold); }
 #about .mission-text { max-width: 750px; text-align: left; margin: 0; font-size: 17px; color: #e0e4d9; }
 .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 3rem; }
 .about-card { background: transparent; border-radius: 0; border: none; border-top: 1px solid #ffffff35; box-shadow: none; text-align: left; padding: 1.6rem 0 0; }
 .about-card:hover { transform: none; box-shadow: none; border-color: #ffffff35; }
-.about-number { color: #dfac88; font-size: var(--fs-label); margin-bottom: 1.3rem; }
+.about-number { color: var(--marigold); font-size: var(--fs-label); margin-bottom: 1.3rem; }
 .about-card h3 { font-size: 31px; }
 .about-card p { color: #cdd5c9; font-size: var(--fs-body); line-height: 1.8; }
 #about .btn-secondary { color: var(--cream); border-color: #ffffff55; }
@@ -184,9 +196,9 @@ h1, h2, h3 { font-weight: 500; }
 .discovery-card:hover .discovery-link { border-color: var(--rust); color: var(--rust); }
 .welcome-story { background: var(--ink); color: var(--cream); }
 .story-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
-.welcome-story .eyebrow { color: #dfac88; }
+.welcome-story .eyebrow { color: var(--marigold); }
 .welcome-story h2 { color: var(--cream); font-size: clamp(40px, 5vw, 64px); line-height: 1.07; letter-spacing: -.035em; }
-.welcome-story h2 em { color: #dfac88; }
+.welcome-story h2 em { color: var(--marigold); }
 .story-copy p { font-size: var(--fs-lead); line-height: 1.85; max-width: 365px; color: #e0e4d9; margin-bottom: 1rem; }
 .story-copy .btn-cta-light { margin-top: 1rem; }
 .footer { padding: 3rem 0; background: var(--cream); color: var(--ink); }
@@ -214,6 +226,101 @@ a:focus-visible, button:focus-visible, input:focus-visible, [role="button"]:focu
 .btn-inquire { background: var(--rust); }
 .gallery-item { border-radius: 3px; }
 .gallery-inquire-tag { background: var(--rust); }
+/* Vibrancy pass: spectrum color, painted italics, paper grain. */
+body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .07; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .14 0 0 0 0 .2 0 0 0 0 .17 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Italic words get a hand-painted swash; --swash picks its color. */
+.editorial-hero h1 em, .directory-intro h1 em, .section-header h2 em, .discovery-card h3 em, .welcome-story h2 em, .community-strip p em { position: relative; z-index: 0; display: inline-block; padding-right: .06em; }
+.editorial-hero h1 em::after, .directory-intro h1 em::after, .section-header h2 em::after, .discovery-card h3 em::after, .welcome-story h2 em::after { content: ''; position: absolute; z-index: -1; left: -.08em; right: -.1em; bottom: -.1em; height: .3em; background: var(--swash, var(--marigold)); -webkit-mask: var(--brush) center / 100% 100% no-repeat; mask: var(--brush) center / 100% 100% no-repeat; transform: rotate(-1.5deg); }
+.section-header h2 em { color: var(--rust); }
+#artists { --swash: var(--sp-pink); }
+#gallery { --swash: var(--marigold); }
+#studios { --swash: var(--sky); }
+#events { --swash: var(--leaf); }
+#about { --swash: var(--sp-pink); }
+#about .section-header h2 em { color: var(--marigold); }
+.welcome-story { --swash: var(--sp-pink); }
+
+/* Color blocks */
+.community-strip { background: var(--marigold); border-color: var(--marigold); }
+.community-strip p em { color: var(--ink); }
+.community-strip [aria-hidden] { color: var(--ink); }
+.feature-stamp { background: var(--marigold); border-color: var(--marigold); box-shadow: 0 0 0 7px #f2b13455; }
+.section-alt { background: var(--blush); }
+#about.section-alt { background: var(--ink); }
+.cta-banner { background: var(--cobalt); }
+.footer { border-top: 0; }
+.footer::before { height: 5px; background: linear-gradient(90deg, var(--sp-red), var(--sp-orange), var(--marigold), var(--leaf), var(--sky), var(--cobalt), var(--sp-pink)); }
+
+/* One spectrum color per numbered item: directory index, discovery cards, about cards. */
+.directory-index a:nth-child(1), .discovery-card:nth-child(1), .about-card:nth-child(1) { --c: var(--sp-pink); }
+.directory-index a:nth-child(2), .discovery-card:nth-child(2), .about-card:nth-child(2) { --c: var(--marigold); }
+.directory-index a:nth-child(3), .discovery-card:nth-child(3), .about-card:nth-child(3) { --c: var(--sky); }
+.directory-index a:nth-child(4) { --c: var(--leaf); }
+.directory-index { border-top: 0; }
+.directory-index a { border-top: 4px solid var(--c); transition: background-color .2s; }
+.directory-index a:hover { background: color-mix(in srgb, var(--c) 14%, transparent); }
+.directory-index a:hover strong { color: var(--ink); }
+.directory-index small { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: color-mix(in srgb, var(--c) 60%, #fffdf7); color: var(--ink); font-weight: 600; letter-spacing: 0; }
+.discovery-card { --swash: var(--c); border-top: 4px solid var(--c); }
+.discovery-card:hover .discovery-link { border-color: var(--c); color: var(--ink); }
+.about-card { border-top: 3px solid var(--c); }
+.about-card:hover { border-color: var(--c); }
+.about-number { color: var(--marigold); }
+
+/* Disciplines: revive the per-discipline color from js/app.js as tinted badges and pills. */
+[data-color="red"], .badge-painting, .badge-theater { --c: var(--sp-red); }
+[data-color="orange"], .badge-sculpture, .badge-crafts, .badge-ceramics, .badge-mixed-media { --c: var(--sp-orange); }
+[data-color="yellow"] { --c: var(--marigold); }
+[data-color="green"], .badge-murals { --c: var(--leaf); }
+[data-color="cyan"], .badge-photography, .badge-digital, .badge-design { --c: var(--sky); }
+[data-color="blue"], .badge-music, .badge-film { --c: var(--cobalt); }
+[data-color="pink"], .badge-poetry, .badge-dance, .badge-textile { --c: var(--sp-pink); }
+.badge { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); background: color-mix(in srgb, var(--c, var(--brown-light)) 22%, #fffdf7); }
+.badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--brown-light)); }
+.filter-pill[data-color]::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--c); vertical-align: 1px; }
+.filter-pill[data-color].active { background: color-mix(in srgb, var(--c) 28%, #fffdf7); border-color: var(--c); color: var(--ink); }
+.filter-pill[data-color].active:hover { color: var(--ink); }
+.artist-card:nth-child(4n+1 of .artist-card) > .artist-photo-placeholder { background: color-mix(in srgb, var(--sp-pink) 30%, #fffdf7) !important; }
+.artist-card:nth-child(4n+2 of .artist-card) > .artist-photo-placeholder { background: color-mix(in srgb, var(--marigold) 38%, #fffdf7) !important; }
+.artist-card:nth-child(4n+3 of .artist-card) > .artist-photo-placeholder { background: color-mix(in srgb, var(--sky) 30%, #fffdf7) !important; }
+.artist-card:nth-child(4n+4 of .artist-card) > .artist-photo-placeholder { background: color-mix(in srgb, var(--leaf) 30%, #fffdf7) !important; }
+
+/* Desktop: larger type scale. Tokens lift UI and body copy; the rest are
+   fixed-size headings and fixed-width measures that need to grow with them. */
+@media (min-width: 1051px) {
+  :root {
+    --fs-label: 12px;
+    --fs-meta: 14px;
+    --fs-ui: 15px;
+    --fs-body: 17px;
+    --fs-lead: 19px;
+  }
+  .brand > span { font-size: 30px; }
+  .brand small { font-size: 11px; }
+  .editorial-hero h1 { font-size: clamp(76px, 7.6vw, 112px); }
+  .editorial-hero p { max-width: 40ch; }
+  .feature-stamp > span { font-size: 9px; }
+  .directory-intro h1 { font-size: clamp(64px, 6.4vw, 92px); }
+  .directory-index strong { font-size: 36px; }
+  .community-strip p { font-size: 30px; }
+  .section-header h2 { font-size: clamp(48px, 4.8vw, 68px); }
+  .artist-card h3 { font-size: 34px; }
+  .empty-state h3 { font-size: clamp(34px, 3.2vw, 46px); }
+  .empty-state p { max-width: 56ch; }
+  .cta-banner h3 { font-size: 46px; }
+  .studio-info h3 { font-size: 48px; }
+  .event-details h3 { font-size: 32px; }
+  #about .mission-text { font-size: 20px; max-width: 64ch; }
+  .about-card h3 { font-size: 36px; }
+  .discovery-card h3 { font-size: clamp(46px, 4.2vw, 58px); }
+  .discovery-card p { max-width: 34ch; }
+  .welcome-story h2 { font-size: clamp(54px, 5.4vw, 78px); }
+  .story-copy p { max-width: 40ch; }
+  .footer-wordmark { font-size: 40px; }
+  .artist-modal-title { font-size: 38px; }
+  .lightbox-info h3 { font-size: 36px; }
+}
 @media (min-width: 769px) and (max-width: 1050px) {
   .brand > span { font-size: 23px; }
   .brand img { width: 44px; height: 44px; }
