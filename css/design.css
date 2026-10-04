@@ -69,16 +69,16 @@ h1, h2, h3 { font-weight: 500; }
 .text-link { color: var(--ink); font-size: var(--fs-ui); font-weight: 500; display: inline-flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 48px; border-bottom: 1px solid var(--line); }
 .text-link:hover { color: var(--rust); border-color: var(--rust); }
 .eyebrow { display: block; font-family: var(--font-body); font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .16em; font-weight: 600; margin-bottom: 1rem; color: var(--rust); }
-.editorial-hero { min-height: auto; padding: clamp(4rem, 9vw, 8.5rem) 0 clamp(3.5rem, 7vw, 6.5rem); display: block; text-align: left; overflow: visible; }
+.editorial-hero { min-height: auto; padding: clamp(4rem, 9vw, 8.5rem) 0 clamp(3.5rem, 7vw, 6.5rem); display: block; text-align: center; overflow: visible; }
 .editorial-hero::before { display: none; }
-.hero-copy { max-width: 1040px; }
+.hero-copy { max-width: 1040px; margin-inline: auto; }
 .location-label { color: var(--muted); display: flex; align-items: center; gap: .6rem; margin-bottom: 1.7rem; }
 .location-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--rust); }
 .editorial-hero h1 { font-size: clamp(56px, 8.4vw, 116px); line-height: .98; letter-spacing: -.045em; margin-bottom: 1.6rem; animation: none; }
 .editorial-hero h1 em { color: var(--rust); font-weight: 500; }
-.editorial-hero p { font-size: var(--fs-lead); max-width: 44ch; line-height: 1.85; margin-bottom: 1.75rem; animation: none; }
-.editorial-hero .hero-buttons { justify-content: flex-start; align-items: center; gap: 1.6rem; animation: none; }
-.hero-footnote { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 1.25rem; margin-top: 2.5rem; font-size: var(--fs-meta); color: var(--muted); }
+.editorial-hero p { font-size: var(--fs-lead); max-width: 44ch; line-height: 1.85; margin: 0 auto 1.75rem; animation: none; }
+.editorial-hero .hero-buttons { justify-content: center; align-items: center; gap: 1.6rem; animation: none; }
+.hero-footnote { display: flex; justify-content: center; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 1.25rem; margin-top: 2.5rem; font-size: var(--fs-meta); color: var(--muted); }
 .tiny-star { color: var(--rust); font-size: 23px; }
 .directory-intro { padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 4vw, 3.5rem); }
 .directory-intro h1 { font-size: clamp(44px, 5.6vw, 76px); line-height: 1.02; letter-spacing: -.04em; margin-bottom: 1.25rem; }
