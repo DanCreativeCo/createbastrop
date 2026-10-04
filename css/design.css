@@ -72,19 +72,6 @@ h1, h2, h3 { font-weight: 500; }
 .editorial-hero { min-height: auto; padding: clamp(4rem, 9vw, 8.5rem) 0 clamp(3.5rem, 7vw, 6.5rem); display: block; text-align: left; overflow: visible; }
 .editorial-hero::before { display: none; }
 .hero-copy { max-width: 1040px; }
-/* Painted cut-out shapes filling the hero's right side; decorative only. */
-.hero-layout { position: relative; }
-.hero-copy { position: relative; z-index: 1; }
-.hero-art { position: absolute; right: clamp(1.25rem, 4.5vw, 4rem); top: 50%; width: clamp(280px, 30vw, 430px); aspect-ratio: .9; transform: translateY(-50%); }
-.hero-art > span { position: absolute; display: block; mix-blend-mode: multiply; }
-.art-sun { top: 2%; right: 0; width: 66%; aspect-ratio: 1; border-radius: 50%; background: var(--marigold); }
-.art-arch { bottom: 6%; left: 8%; width: 40%; aspect-ratio: .74; border-radius: 999px 999px 0 0; background: var(--sp-pink); transform: rotate(-6deg); }
-.art-quarter { bottom: 14%; right: 6%; width: 34%; aspect-ratio: 1; border-radius: 100% 0 0 0; background: var(--cobalt); }
-.art-dots { top: 6%; left: 2%; width: 34%; aspect-ratio: 1; background: radial-gradient(circle, var(--sky) 0 4.5px, transparent 5px) 0 0 / 20px 20px; }
-.art-stroke { top: 52%; left: 18%; width: 72%; height: 12%; background: var(--leaf); -webkit-mask: var(--brush) center / 100% 100% no-repeat; mask: var(--brush) center / 100% 100% no-repeat; transform: rotate(-14deg); }
-.art-star { top: 30%; left: 30%; color: var(--rust); font-size: clamp(40px, 4vw, 60px); line-height: 1; mix-blend-mode: normal !important; transform: rotate(12deg); }
-.editorial-hero .hero-footnote { max-width: 600px; }
-@media (max-width: 1050px) { .hero-art { display: none; } }
 .location-label { color: var(--muted); display: flex; align-items: center; gap: .6rem; margin-bottom: 1.7rem; }
 .location-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--rust); }
 .editorial-hero h1 { font-size: clamp(56px, 8.4vw, 116px); line-height: .98; letter-spacing: -.045em; margin-bottom: 1.6rem; animation: none; }
