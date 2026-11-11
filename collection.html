@@ -3,24 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collection | Create Bastrop</title>
+  <title>Original Art Collection — Create Bastrop | Bastrop, TX</title>
+  <meta name="description" content="Browse original paintings, wood-fired Colorado River ceramics, cast silicon bronze sculptures, blown silo glass, linocuts, and botanical tapestries created in Bastrop, Texas.">
+  <link rel="canonical" href="https://createbastrop.com/collection.html">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <meta property="og:title" content="Original Art Collection — Create Bastrop">
+  <meta property="og:description" content="Art to live with—shaped by Bastrop’s Lost Pines, Colorado River clay, historic bridges, and bronze foundries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/collection.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="collection.html">Collection</a>
-      <a href="events.html">Events</a>
-      <a href="studios.html">Studios</a>
-    </nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="site-topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-badge">
+        <span class="topbar-dot" aria-hidden="true"></span>
+        Bastrop Cultural Arts District &bull; Designated by the Texas Commission on the Arts
+      </span>
+      <span class="topbar-hide-sm">30.1105° N, 97.3153° W &bull; Colorado River &amp; Lost Pines</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link" aria-label="Create Bastrop Home">
+        <img src="assets/favicon.svg" alt="" class="brand-mark" width="44" height="44">
+        <span class="brand-text">
+          <span class="brand-name">Create Bastrop</span>
+          <span class="brand-sub">Bastrop, TX Art &amp; Culture</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="collection.html" aria-current="page">Collection</a>
+        <a href="events.html">Events</a>
+        <a href="studios.html">Studios</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="trail-pass-trigger" data-open-pass aria-label="Open My Bastrop Trail Pass">
+          <span>Trail Pass</span>
+          <span class="trail-count" data-trail-count>1</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm topbar-hide-sm" data-open-submit data-submit-topic="Artist / Portfolio Submission">
+          Get Featured
+        </button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+          &#9776;
+        </button>
+      </div>
+    </div>
   </header>
-  <main>
-    <h1>Collection</h1>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow">02 / Curated Catalog</span>
+          <h1>Original works to <em>live with.</em></h1>
+          <p>
+            Click any piece to inspect materials, pigment palettes, dimensions, and the Bastrop story behind its creation—or inquire directly with the artist with zero platform commission.
+          </p>
+        </div>
+        <aside class="page-hero-aside">
+          <h3>Looking for a Custom Commission?</h3>
+          <p>Many Bastrop painters, woodworkers, and bronze sculptors accept site-specific residential and public commissions.</p>
+          <button type="button" class="btn btn-outline btn-sm" data-open-submit data-submit-topic="Collector Artwork Inquiry">Request a Commission &rarr;</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="filter-bar" role="region" aria-label="Filter collection works">
+          <div class="filter-pills" role="group" aria-label="Medium filter">
+            <button type="button" class="filter-pill is-active" data-medium-pill="All">All Mediums</button>
+            <button type="button" class="filter-pill" data-medium-pill="Painting">Painting</button>
+            <button type="button" class="filter-pill" data-medium-pill="Ceramics & Glass">Ceramics &amp; Glass</button>
+            <button type="button" class="filter-pill" data-medium-pill="Sculpture & Wood">Sculpture &amp; Wood</button>
+            <button type="button" class="filter-pill" data-medium-pill="Print & Photography">Print &amp; Photo</button>
+            <button type="button" class="filter-pill" data-medium-pill="Fiber & Textile">Fiber &amp; Textile</button>
+          </div>
+
+          <div class="filter-controls">
+            <select id="collection-avail" class="select-input" aria-label="Filter by availability">
+              <option value="All">All Availability</option>
+              <option value="Available">Available to Collect</option>
+              <option value="On View in District">On View in District</option>
+            </select>
+            <select id="collection-sort" class="select-input" aria-label="Sort artworks">
+              <option value="featured">Sort: Curated Order</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+            <input type="search" id="collection-search" class="search-input" placeholder="Search title, material, artist..." aria-label="Search collection">
+          </div>
+        </div>
+
+        <div class="results-meta" id="collection-results-meta" aria-live="polite">Showing 9 cataloged Bastrop works</div>
+
+        <div class="collection-grid" id="collection-grid"></div>
+      </div>
+    </section>
   </main>
-  <footer></footer>
-  <script src="js/app.js"></script>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">Create Bastrop</div>
+          <p style="margin:0;max-width:360px;font-size:0.93rem;">
+            A community arts &amp; cultural showcase connecting Bastrop, Texas makers, historic venues, working studios, and the neighbors and visitors who love them.
+          </p>
+          <div class="footer-coords">30.1105° N, 97.3153° W &bull; EL CAMINO REAL &amp; COLORADO RIVER</div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; Heritage</a></li>
+            <li><a href="artists.html">Artists Directory</a></li>
+            <li><a href="collection.html">Original Collection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Plan Your Visit</h4>
+          <ul class="footer-links">
+            <li><a href="events.html">Events &amp; Art Walks</a></li>
+            <li><a href="studios.html">Studios &amp; Cultural Spaces</a></li>
+            <li><a href="#pass" data-open-pass>My Bastrop Trail Pass</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Participate</h4>
+          <ul class="footer-links">
+            <li><a href="#submit" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Art</a></li>
+            <li><a href="#submit" data-open-submit data-submit-topic="List a Local Studio or Venue">List a Studio or Space</a></li>
+            <li><a href="mailto:hello@createbastrop.com">hello@createbastrop.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Create Bastrop &bull; Celebrating Bastrop County Art &amp; Culture</span>
+        <span>Built in Bastrop, TX &bull; <a href="https://bastropcode.com" target="_blank" rel="noopener" style="text-decoration:underline;">Bastrop Code Studio</a></span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

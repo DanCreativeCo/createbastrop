@@ -3,24 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Create Bastrop</title>
+  <title>About &amp; Cultural Heritage — Create Bastrop | Bastrop, TX</title>
+  <meta name="description" content="Learn about Create Bastrop’s community mission and trace two centuries of Bastrop, Texas art, architecture, and cultural heritage along the Colorado River.">
+  <link rel="canonical" href="https://createbastrop.com/about.html">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <meta property="og:title" content="About &amp; Cultural Heritage — Create Bastrop">
+  <meta property="og:description" content="Connecting Bastrop’s artists, studios, stages, and collectors—rooted in two centuries of Lost Pines and Colorado River history.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/about.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="collection.html">Collection</a>
-      <a href="events.html">Events</a>
-      <a href="studios.html">Studios</a>
-    </nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="site-topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-badge">
+        <span class="topbar-dot" aria-hidden="true"></span>
+        Bastrop Cultural Arts District &bull; Designated by the Texas Commission on the Arts
+      </span>
+      <span class="topbar-hide-sm">30.1105° N, 97.3153° W &bull; Colorado River &amp; Lost Pines</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link" aria-label="Create Bastrop Home">
+        <img src="assets/favicon.svg" alt="" class="brand-mark" width="44" height="44">
+        <span class="brand-text">
+          <span class="brand-name">Create Bastrop</span>
+          <span class="brand-sub">Bastrop, TX Art &amp; Culture</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="events.html">Events</a>
+        <a href="studios.html">Studios</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="trail-pass-trigger" data-open-pass aria-label="Open My Bastrop Trail Pass">
+          <span>Trail Pass</span>
+          <span class="trail-count" data-trail-count>1</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm topbar-hide-sm" data-open-submit data-submit-topic="Artist / Portfolio Submission">
+          Get Featured
+        </button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+          &#9776;
+        </button>
+      </div>
+    </div>
   </header>
-  <main>
-    <h1>About</h1>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow">Rooted Here &bull; Open to Everyone</span>
+          <h1>Every Bastrop maker deserves a <em>stage.</em></h1>
+          <p>
+            Create Bastrop is an independent community arts initiative connecting Bastrop County’s painters, sculptors, potters, performers, and creative spaces directly with collectors, neighbors, and cultural travelers.
+          </p>
+        </div>
+        <aside class="page-hero-aside">
+          <h3>Zero Commission. Direct Connection.</h3>
+          <p>When you inquire about an artwork or workshop on Create Bastrop, 100% of your support goes directly to the local artist or studio.</p>
+          <button type="button" class="btn btn-primary btn-sm" data-open-submit data-submit-topic="Artist / Portfolio Submission">Join as a Local Maker &rarr;</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- How Create Bastrop Serves the Community -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">01 / Our Purpose</span>
+            <h2>Three ways we strengthen <em>Bastrop’s creative life.</em></h2>
+            <p>Whether you throw pots in a backyard kiln, collect original Texas art, or arrive in town on a Saturday afternoon, there is a place here for you.</p>
+          </div>
+        </div>
+
+        <div class="roles-grid">
+          <article class="role-card">
+            <div class="pillar-num">01 &bull; FOR ARTISTS &amp; STUDIOS</div>
+            <h3>A Lasting Digital Showcase</h3>
+            <p style="color:var(--ink-700);font-size:0.94rem;margin-bottom:1.25rem;">
+              Present your portfolio, studio hours, workshops, and commission availability alongside fellow Bastrop County creatives—without middleman gallery fees.
+            </p>
+            <button type="button" class="btn btn-primary btn-sm" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Portfolio</button>
+          </article>
+
+          <article class="role-card">
+            <div class="pillar-num">02 &bull; FOR COLLECTORS</div>
+            <h3>Art with a Sense of Place</h3>
+            <p style="color:var(--ink-700);font-size:0.94rem;margin-bottom:1.25rem;">
+              Acquire original works shaped by Bastrop’s river clay, loblolly timber, silicon bronze, and Main Street light—and meet the maker behind every piece.
+            </p>
+            <a href="collection.html" class="btn btn-outline btn-sm">Browse Original Works</a>
+          </article>
+
+          <article class="role-card">
+            <div class="pillar-num">03 &bull; FOR VISITORS &amp; NEIGHBORS</div>
+            <h3>Your Cultural Field Guide</h3>
+            <p style="color:var(--ink-700);font-size:0.94rem;margin-bottom:1.25rem;">
+              Build a custom weekend itinerary across converted glass silos, historic 1889 stages, bronze pours, and First Friday Art Walks along the Colorado River.
+            </p>
+            <a href="studios.html" class="btn btn-outline btn-sm">Explore Bastrop Spaces</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bastrop Cultural Heritage Timeline -->
+    <section class="section section-sand" id="heritage-timeline">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">02 / Place &amp; Memory</span>
+            <h2>Why Bastrop is unlike anywhere else in <em>Central Texas.</em></h2>
+            <p>An isolated Pleistocene pine forest, a major river ford, 19th-century brick theaters, and world-famous bronze foundries shaped a creative culture centuries in the making.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-era">Ancient &ndash; 1800s &bull; River Ford &amp; Camino Real</div>
+            <h3>Crossroads on the Colorado River</h3>
+            <p>
+              For millennia, Tonkawa and neighboring Indigenous peoples gathered along the shoals of the Colorado River beneath an isolated stand of loblolly pines—trees stranded 100 miles west of the East Texas Piney Woods since the last Ice Age. Spanish travelers later charted <em>El Camino Real de los Tejas</em> right across this river bend.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-era">1832 &ndash; 1889 &bull; Timber Mills &amp; Victorian Stage</div>
+            <h3>Founding of Bastrop &amp; the 1889 Opera House</h3>
+            <p>
+              Established in 1832 as one of Texas’s earliest towns, Bastrop supplied loblolly pine timber to build early Austin. Prosperity along Main and Water Streets culminated in the 1889 construction of the brick <strong>Bastrop Opera House</strong>, bringing theater, recitals, and traveling performers to the river valley.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-era">1923 &ndash; 1938 &bull; Iron Truss &amp; Hand-Wrought Stone</div>
+            <h3>The Old Iron Bridge &amp; CCC Master Artisans</h3>
+            <p>
+              In 1923, the steel Parker through-truss bridge spanned the Colorado River, today preserved as a beloved pedestrian arts promenade. During the 1930s, Civilian Conservation Corps stonecutters, blacksmiths, and woodworkers crafted the red-sandstone and cedar landmarks of <strong>Bastrop State Park</strong>, now a National Historic Landmark.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-era">1990s &ndash; 2017 &bull; Bronze Foundries &amp; Rebirth</div>
+            <h3>Monumental Bronze &amp; the Glassblowing Silos</h3>
+            <p>
+              Fine-art bronze casting took root in Bastrop, attracting sculptors from across North America. Following the 2011 Bastrop County Complex Fire, local woodworkers and painters turned salvaged loblolly timber into enduring symbols of ecological rebirth—and in 2017, four historic 1930s feed-mill grain silos opened anew as the <strong>Lost Pines Art Center</strong>.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-era">Today &bull; Designated Texas Cultural Arts District</div>
+            <h3>A Living Corridor of Studios, Murals &amp; Makers</h3>
+            <p>
+              Recognized officially by the Texas Commission on the Arts, Bastrop’s Cultural Arts District weaves together independent teaching studios like COR Art Studio, co-op galleries, riverside amphitheaters, public murals, and First Friday Art Walks.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">03 / Common Questions</span>
+            <h2>Visiting, collecting &amp; <em>participating.</em></h2>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button type="button" class="faq-question" data-faq-btn aria-expanded="true" aria-controls="faq-panel-1">
+              <span>Where should a first-time visitor start in the Bastrop Cultural District?</span>
+              <span class="faq-icon" aria-hidden="true">−</span>
+            </button>
+            <div class="faq-answer" id="faq-panel-1">
+              Park free along Main or Water Street in Historic Downtown. Start at the Bastrop Museum &amp; Visitor Center (904 Main St), stroll across the 1923 Old Iron Bridge over the Colorado River, browse Main Street galleries and murals, then head ten blocks east to watch live glassblowing inside the silos at Lost Pines Art Center (1204 Chestnut St).
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" data-faq-btn aria-expanded="false" aria-controls="faq-panel-2">
+              <span>How do I purchase or commission an original piece from the Collection?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-panel-2" hidden>
+              Open any artwork on the <a href="collection.html" style="text-decoration:underline;color:var(--terracotta);">Collection page</a> and click <strong>Inquire About Piece</strong>, or visit an artist’s profile to request a custom commission. Create Bastrop connects you directly with the creator and takes 0% commission.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" data-faq-btn aria-expanded="false" aria-controls="faq-panel-3">
+              <span>Who can be listed on Create Bastrop, and does it cost anything?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-panel-3" hidden>
+              Listing is completely free for visual artists, craftspeople, performing artists, creative studios, and cultural event organizers working in Bastrop County (including Bastrop, Smithville, Elgin, Cedar Creek, Paige, and McDade). Click <strong>Get Featured</strong> in the top bar to send your details.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" data-faq-btn aria-expanded="false" aria-controls="faq-panel-4">
+              <span>How does the “My Bastrop Trail Pass” feature work?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-panel-4" hidden>
+              Click <strong>+ Trail Pass</strong> on any studio, landmark, artist, artwork, or event across the website. Your selections stay saved right in your browser across pages so you can copy or print a personalized Bastrop weekend itinerary anytime.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer></footer>
-  <script src="js/app.js"></script>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">Create Bastrop</div>
+          <p style="margin:0;max-width:360px;font-size:0.93rem;">
+            A community arts &amp; cultural showcase connecting Bastrop, Texas makers, historic venues, working studios, and the neighbors and visitors who love them.
+          </p>
+          <div class="footer-coords">30.1105° N, 97.3153° W &bull; EL CAMINO REAL &amp; COLORADO RIVER</div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; Heritage</a></li>
+            <li><a href="artists.html">Artists Directory</a></li>
+            <li><a href="collection.html">Original Collection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Plan Your Visit</h4>
+          <ul class="footer-links">
+            <li><a href="events.html">Events &amp; Art Walks</a></li>
+            <li><a href="studios.html">Studios &amp; Cultural Spaces</a></li>
+            <li><a href="#pass" data-open-pass>My Bastrop Trail Pass</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Participate</h4>
+          <ul class="footer-links">
+            <li><a href="#submit" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Art</a></li>
+            <li><a href="#submit" data-open-submit data-submit-topic="List a Local Studio or Venue">List a Studio or Space</a></li>
+            <li><a href="mailto:hello@createbastrop.com">hello@createbastrop.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Create Bastrop &bull; Celebrating Bastrop County Art &amp; Culture</span>
+        <span>Built in Bastrop, TX &bull; <a href="https://bastropcode.com" target="_blank" rel="noopener" style="text-decoration:underline;">Bastrop Code Studio</a></span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

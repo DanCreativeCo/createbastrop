@@ -3,24 +3,377 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Bastrop | Create Bastrop</title>
+  <title>Create Bastrop — Art, Makers &amp; Cultural Heritage of Bastrop, Texas</title>
+  <meta name="description" content="Explore Bastrop, Texas’s designated Cultural Arts District: local painters, bronze foundries, glassblowing silos, the 1889 Opera House, Main Street galleries, and First Friday Art Walks along the Colorado River.">
+  <link rel="canonical" href="https://createbastrop.com/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <meta property="og:title" content="Create Bastrop — Art, Makers &amp; Culture in Bastrop, TX">
+  <meta property="og:description" content="Where the Lost Pines meet the living canvas. Meet Bastrop’s artists, explore original works, and plan your Cultural District trail.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="collection.html">Collection</a>
-      <a href="events.html">Events</a>
-      <a href="studios.html">Studios</a>
-    </nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="site-topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-badge">
+        <span class="topbar-dot" aria-hidden="true"></span>
+        Bastrop Cultural Arts District &bull; Designated by the Texas Commission on the Arts
+      </span>
+      <span class="topbar-hide-sm">30.1105° N, 97.3153° W &bull; Colorado River &amp; Lost Pines</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link" aria-label="Create Bastrop Home">
+        <img src="assets/favicon.svg" alt="" class="brand-mark" width="44" height="44">
+        <span class="brand-text">
+          <span class="brand-name">Create Bastrop</span>
+          <span class="brand-sub">Bastrop, TX Art &amp; Culture</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="events.html">Events</a>
+        <a href="studios.html">Studios</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="trail-pass-trigger" data-open-pass aria-label="Open My Bastrop Trail Pass">
+          <span>Trail Pass</span>
+          <span class="trail-count" data-trail-count>1</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm topbar-hide-sm" data-open-submit data-submit-topic="Artist / Portfolio Submission">
+          Get Featured
+        </button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+          &#9776;
+        </button>
+      </div>
+    </div>
   </header>
-  <main>
-    <h1>Create Bastrop</h1>
+
+  <main id="main-content">
+    <!-- Editorial Bastrop Hero -->
+    <section class="home-hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Lost Pines &bull; Historic Main Street &bull; Colorado River</span>
+          <h1 class="hero-headline">Where the Lost Pines meet a <em>living canvas.</em></h1>
+          <p class="hero-lead">
+            Thirty miles downriver from Austin, Bastrop pairs 1889 Victorian brick stages and converted glassblowing silos with world-renowned bronze foundries, wood-fired river clay, and front-porch Texas songcraft.
+          </p>
+          <div class="hero-cta-row">
+            <a href="collection.html" class="btn btn-primary">Explore Original Works &rarr;</a>
+            <a href="artists.html" class="btn btn-outline">Meet Bastrop Makers</a>
+            <a href="#district-explorer-section" class="btn btn-outline">Interactive Cultural Map</a>
+          </div>
+          <div class="hero-stats" aria-label="Bastrop Cultural Highlights">
+            <div class="hero-stat">
+              <strong>1889</strong>
+              <span>Historic Opera House &amp; Main St architecture</span>
+            </div>
+            <div class="hero-stat">
+              <strong>8+ Hubs</strong>
+              <span>Silos, bronze foundries, studios &amp; river walks</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Every 1st Fri</strong>
+              <span>Downtown open studios, murals &amp; live music</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-panorama-card">
+          <div class="hero-panorama-frame">
+            <svg viewBox="0 0 600 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated dusk panorama of Bastrop's Lost Pines, grain silos, historic Main Street, and 1923 Old Iron Bridge over the Colorado River">
+              <defs>
+                <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F5CA8C"/>
+                  <stop offset="52%" stop-color="#E48859"/>
+                  <stop offset="100%" stop-color="#FAF2E4"/>
+                </linearGradient>
+                <linearGradient id="heroRiver" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#214654"/>
+                  <stop offset="48%" stop-color="#D79541"/>
+                  <stop offset="100%" stop-color="#1A3945"/>
+                </linearGradient>
+              </defs>
+              <rect width="600" height="440" fill="url(#heroSky)"/>
+              <circle cx="435" cy="108" r="52" fill="#FFF6DC" opacity="0.9"/>
+
+              <!-- Distant Red Ironstone Bluffs -->
+              <path d="M0 245 Q145 188 305 228 T600 202 L600 315 L0 315 Z" fill="#AE472C"/>
+
+              <!-- Historic Grain Silos (Lost Pines Art Center) -->
+              <g fill="#D8CEBE" stroke="#8C7E6B" stroke-width="1.5">
+                <rect x="372" y="152" width="26" height="92" rx="4"/>
+                <rect x="401" y="144" width="26" height="100" rx="4"/>
+                <rect x="430" y="154" width="26" height="90" rx="4"/>
+                <path d="M372 152 Q385 138 398 152 M401 144 Q414 130 427 144 M430 154 Q443 140 456 154" fill="#B84A2E"/>
+              </g>
+
+              <!-- Historic Main Street Gables & 1889 Opera House -->
+              <g fill="#7D2E1B">
+                <rect x="148" y="178" width="64" height="72"/>
+                <polygon points="144,178 180,152 216,178" fill="#5E2112"/>
+                <rect x="218" y="190" width="54" height="60" fill="#943A23"/>
+                <rect x="278" y="182" width="58" height="68" fill="#6D2818"/>
+              </g>
+              <!-- Warm lit gallery windows -->
+              <g fill="#FFE8A3">
+                <rect x="162" y="194" width="12" height="18" rx="2"/><rect x="186" y="194" width="12" height="18" rx="2"/>
+                <rect x="232" y="204" width="11" height="16" rx="2"/><rect x="250" y="204" width="11" height="16" rx="2"/>
+                <rect x="294" y="198" width="12" height="18" rx="2"/><rect x="312" y="198" width="12" height="18" rx="2"/>
+              </g>
+
+              <!-- Relic Loblolly Pines Silhouettes -->
+              <g fill="#182E23">
+                <path d="M24 262 L46 158 L68 262 Z"/>
+                <path d="M56 265 L82 136 L108 265 Z"/>
+                <path d="M95 268 L115 174 L135 268 Z"/>
+                <path d="M478 258 L504 138 L530 258 Z"/>
+                <path d="M518 262 L546 124 L574 262 Z"/>
+                <path d="M555 265 L578 166 L600 265 Z"/>
+              </g>
+
+              <!-- 1923 Old Iron Bridge Parker Truss -->
+              <g stroke="#FAF6F0" stroke-width="3" fill="none">
+                <path d="M48 296 L142 224 L448 224 L542 296"/>
+                <line x1="25" y1="296" x2="575" y2="296" stroke="#C85538" stroke-width="6"/>
+                <line x1="142" y1="224" x2="142" y2="296"/><line x1="218" y1="224" x2="218" y2="296"/>
+                <line x1="295" y1="224" x2="295" y2="296"/><line x1="372" y1="224" x2="372" y2="296"/>
+                <line x1="448" y1="224" x2="448" y2="296"/>
+                <line x1="142" y1="224" x2="218" y2="296"/><line x1="218" y1="224" x2="295" y2="296"/>
+                <line x1="372" y1="296" x2="448" y2="224"/><line x1="295" y1="296" x2="372" y2="224"/>
+              </g>
+
+              <!-- Colorado River Foreground -->
+              <rect y="302" width="600" height="138" fill="url(#heroRiver)"/>
+              <g stroke="#FAF6F0" stroke-width="2.5" stroke-linecap="round" opacity="0.52">
+                <line x1="65" y1="334" x2="235" y2="334"/>
+                <line x1="310" y1="356" x2="515" y2="356"/>
+                <line x1="130" y1="384" x2="420" y2="384"/>
+                <line x1="215" y1="412" x2="385" y2="412"/>
+              </g>
+            </svg>
+          </div>
+          <div class="hero-panorama-caption">
+            <span>LOST PINES SILOS &bull; MAIN ST &bull; 1923 IRON BRIDGE</span>
+            <span>COLORADO RIVER BEND</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Cultural Strip -->
+    <div class="district-ribbon" aria-label="Bastrop cultural highlights">
+      <div class="ribbon-track">
+        <span>Texas Designated Cultural Arts District</span><span class="sep">✳</span>
+        <span>Lost Pines Glassblowing Silos</span><span class="sep">✳</span>
+        <span>1889 Bastrop Opera House</span><span class="sep">✳</span>
+        <span>Monumental Lost-Wax Bronze Foundries</span><span class="sep">✳</span>
+        <span>First Friday Main Street Art Walks</span><span class="sep">✳</span>
+        <span>Colorado River Plein Air &amp; Songcraft</span><span class="sep">✳</span>
+        <span>Texas Designated Cultural Arts District</span><span class="sep">✳</span>
+        <span>Lost Pines Glassblowing Silos</span><span class="sep">✳</span>
+        <span>1889 Bastrop Opera House</span><span class="sep">✳</span>
+        <span>Monumental Lost-Wax Bronze Foundries</span><span class="sep">✳</span>
+        <span>First Friday Main Street Art Walks</span><span class="sep">✳</span>
+        <span>Colorado River Plein Air &amp; Songcraft</span>
+      </div>
+    </div>
+
+    <!-- Four Cultural Pillars -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">01 / Cultural Ecosystem</span>
+            <h2>Small river town. <em>Monumental creative soul.</em></h2>
+            <p>From 2,000°F molten bronze pours on Highway 71 to quiet color-theory mornings and historic Main Street murals, Bastrop makes room for every discipline.</p>
+          </div>
+          <a href="about.html" class="btn btn-outline">Read Bastrop’s Cultural Story &rarr;</a>
+        </div>
+
+        <div class="pillars-grid">
+          <a href="studios.html" class="pillar-card">
+            <div>
+              <div class="pillar-num">PILLAR 01 &bull; SPACES</div>
+              <h3>Silos, Studios &amp; Co-ops</h3>
+              <p>Step inside converted 1930s grain silos at Lost Pines Art Center, take a color-theory class at COR Art Studio, or browse artist-run downtown galleries.</p>
+            </div>
+            <span class="pillar-link">Explore 8 Spaces &rarr;</span>
+          </a>
+
+          <a href="collection.html" class="pillar-card">
+            <div>
+              <div class="pillar-num">PILLAR 02 &bull; CRAFT</div>
+              <h3>Bronze, Clay &amp; Timber</h3>
+              <p>Bastrop casts monumental public bronzes shipped nationwide, fires alluvial Colorado River clay with loblolly pine ash, and carves salvaged timber.</p>
+            </div>
+            <span class="pillar-link">Browse Collection &rarr;</span>
+          </a>
+
+          <a href="events.html" class="pillar-card">
+            <div>
+              <div class="pillar-num">PILLAR 03 &bull; STAGE</div>
+              <h3>1889 Stage &amp; River Song</h3>
+              <p>Catch chamber Americana and theater beneath the pressed-brick arches of the Bastrop Opera House or open-mic poetry overlooking the river bend.</p>
+            </div>
+            <span class="pillar-link">See Calendar &rarr;</span>
+          </a>
+
+          <a href="about.html#heritage-timeline" class="pillar-card">
+            <div>
+              <div class="pillar-num">PILLAR 04 &bull; HERITAGE</div>
+              <h3>Camino Real to Iron Bridge</h3>
+              <p>Walk centuries of layered history—from Indigenous river crossings and El Camino Real de los Tejas to 1930s CCC red-sandstone craftsmanship.</p>
+            </div>
+            <span class="pillar-link">Explore Timeline &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Bastrop Cultural District Map -->
+    <section class="section section-sand" id="district-explorer-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">02 / Interactive Cultural Trail</span>
+            <h2>Walk the Bastrop <em>Cultural District.</em></h2>
+            <p>Select any numbered landmark pin across Historic Main Street, Chestnut Street, the Colorado River, and the Lost Pines corridor—and save stops to your personal Trail Pass.</p>
+          </div>
+          <button type="button" class="btn btn-pine" data-open-pass>Open My Trail Pass</button>
+        </div>
+
+        <div id="district-map-root"></div>
+      </div>
+    </section>
+
+    <!-- Featured Original Collection -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">03 / Original Works</span>
+            <h2>Rooted in Bastrop <em>earth &amp; light.</em></h2>
+            <p>Discover available paintings, wood-fired ceramics, reduction linocuts, and cast bronze directly from the artists who made them.</p>
+          </div>
+          <a href="collection.html" class="btn btn-primary">View Full Collection (9) &rarr;</a>
+        </div>
+
+        <div class="collection-grid" id="home-featured-works"></div>
+      </div>
+    </section>
+
+    <!-- Featured Local Makers -->
+    <section class="section section-sand">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">04 / The Makers</span>
+            <h2>Meet the people <em>behind the work.</em></h2>
+            <p>Painters, educators, potters, bronze chasers, glassblowers, and printmakers shaping Bastrop County’s creative identity.</p>
+          </div>
+          <a href="artists.html" class="btn btn-outline">All Bastrop Artists &rarr;</a>
+        </div>
+
+        <div class="artists-grid" id="home-featured-artists"></div>
+      </div>
+    </section>
+
+    <!-- Upcoming Bastrop Events -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-copy">
+            <span class="eyebrow">05 / Come Out in Person</span>
+            <h2>Upcoming <em>art walks, pours &amp; workshops.</em></h2>
+            <p>Export any gathering straight to your phone calendar (.ics) or add it to your weekend Trail Pass.</p>
+          </div>
+          <a href="events.html" class="btn btn-outline">Full Cultural Calendar &rarr;</a>
+        </div>
+
+        <div class="events-list" id="home-upcoming-events"></div>
+      </div>
+    </section>
+
+    <!-- Community Callout Banner -->
+    <section class="section section-pine">
+      <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;">
+        <div style="max-width:640px;">
+          <span class="eyebrow">Open Community Directory</span>
+          <h2 style="font-size:clamp(2.1rem,4vw,3.1rem);margin-bottom:0.65rem;">Make something in Bastrop County? <em>Take your stage.</em></h2>
+          <p style="margin:0;color:rgba(250,246,240,0.82);font-size:1.05rem;">
+            Create Bastrop is free and open to local visual artists, craftspeople, musicians, studios, and community event hosts across Bastrop, Smithville, Elgin, and Cedar Creek.
+          </p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.85rem;">
+          <button type="button" class="btn btn-light" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Portfolio</button>
+          <button type="button" class="btn btn-primary" data-open-submit data-submit-topic="Submit a Bastrop Cultural Event">Post a Local Event</button>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer></footer>
-  <script src="js/app.js"></script>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">Create Bastrop</div>
+          <p style="margin:0;max-width:360px;font-size:0.93rem;">
+            A community arts &amp; cultural showcase connecting Bastrop, Texas makers, historic venues, working studios, and the neighbors and visitors who love them.
+          </p>
+          <div class="footer-coords">30.1105° N, 97.3153° W &bull; EL CAMINO REAL &amp; COLORADO RIVER</div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; Heritage</a></li>
+            <li><a href="artists.html">Artists Directory</a></li>
+            <li><a href="collection.html">Original Collection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Plan Your Visit</h4>
+          <ul class="footer-links">
+            <li><a href="events.html">Events &amp; Art Walks</a></li>
+            <li><a href="studios.html">Studios &amp; Cultural Spaces</a></li>
+            <li><a href="#pass" data-open-pass>My Bastrop Trail Pass</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Participate</h4>
+          <ul class="footer-links">
+            <li><a href="#submit" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Art</a></li>
+            <li><a href="#submit" data-open-submit data-submit-topic="List a Local Studio or Venue">List a Studio or Space</a></li>
+            <li><a href="mailto:hello@createbastrop.com">hello@createbastrop.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Create Bastrop &bull; Celebrating Bastrop County Art &amp; Culture</span>
+        <span>Built in Bastrop, TX &bull; <a href="https://bastropcode.com" target="_blank" rel="noopener" style="text-decoration:underline;">Bastrop Code Studio</a></span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

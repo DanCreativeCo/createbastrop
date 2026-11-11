@@ -3,24 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Events | Create Bastrop</title>
+  <title>Cultural Events &amp; Art Walks — Create Bastrop | Bastrop, TX</title>
+  <meta name="description" content="Upcoming Bastrop, Texas cultural events: First Friday Main Street Art Walks, live glassblowing inside the silos, 1889 Opera House performances, foundry pours, and hands-on workshops.">
+  <link rel="canonical" href="https://createbastrop.com/events.html">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <meta property="og:title" content="Cultural Events &amp; Art Walks — Create Bastrop">
+  <meta property="og:description" content="Plan your night out in Bastrop’s Cultural Arts District—open studios, live music, theater, and hands-on workshops.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://createbastrop.com/events.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/data.js"></script>
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="artists.html">Artists</a>
-      <a href="collection.html">Collection</a>
-      <a href="events.html">Events</a>
-      <a href="studios.html">Studios</a>
-    </nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="site-topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-badge">
+        <span class="topbar-dot" aria-hidden="true"></span>
+        Bastrop Cultural Arts District &bull; Designated by the Texas Commission on the Arts
+      </span>
+      <span class="topbar-hide-sm">30.1105° N, 97.3153° W &bull; Colorado River &amp; Lost Pines</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link" aria-label="Create Bastrop Home">
+        <img src="assets/favicon.svg" alt="" class="brand-mark" width="44" height="44">
+        <span class="brand-text">
+          <span class="brand-name">Create Bastrop</span>
+          <span class="brand-sub">Bastrop, TX Art &amp; Culture</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="artists.html">Artists</a>
+        <a href="collection.html">Collection</a>
+        <a href="events.html" aria-current="page">Events</a>
+        <a href="studios.html">Studios</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="trail-pass-trigger" data-open-pass aria-label="Open My Bastrop Trail Pass">
+          <span>Trail Pass</span>
+          <span class="trail-count" data-trail-count>1</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm topbar-hide-sm" data-open-submit data-submit-topic="Submit a Bastrop Cultural Event">
+          Post Event
+        </button>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation menu">
+          &#9776;
+        </button>
+      </div>
+    </div>
   </header>
-  <main>
-    <h1>Events</h1>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow">03 / Gatherings &amp; Open Doors</span>
+          <h1>Bastrop cultural <em>calendar.</em></h1>
+          <p>
+            Art walks along brick-lined Main Street, molten bronze pours, glassblowing afternoons, riverfront open mics, and hands-on studio classes for all ages.
+          </p>
+        </div>
+        <aside class="page-hero-aside">
+          <h3>Hosting a Workshop, Show, or Open Mic?</h3>
+          <p>Share your Bastrop County arts or cultural gathering with the community calendar for free.</p>
+          <button type="button" class="btn btn-primary btn-sm" data-open-submit data-submit-topic="Submit a Bastrop Cultural Event">Submit an Event &rarr;</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Signature First Friday Walking Route Highlight -->
+        <div class="first-friday-banner">
+          <div>
+            <span class="eyebrow">Signature Monthly Tradition</span>
+            <h2 style="font-size:clamp(2rem,3.6vw,2.85rem);margin-bottom:0.65rem;">First Friday <em>Downtown Art Walk</em></h2>
+            <p style="margin:0 0 1.35rem;color:rgba(250,246,240,0.86);font-size:1rem;max-width:560px;">
+              On the first Friday of every month from 5:30 PM to 9:00 PM, Historic Downtown Bastrop throws open gallery doors, courtyard stages, print presses, and sidewalk easels—free and family-friendly.
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+              <button type="button" class="btn btn-light btn-sm"
+                data-save-id="event:first-friday-dec-2026"
+                data-save-type="Cultural Event"
+                data-save-title="First Friday Downtown Art Walk"
+                data-save-sub="Every First Friday · 5:30 PM – 9:00 PM · Main St"
+                data-save-href="events.html">+ Trail Pass</button>
+              <a href="studios.html" class="btn btn-primary btn-sm">Explore Participating Venues &rarr;</a>
+            </div>
+          </div>
+          <div class="route-steps">
+            <h3>Suggested 4-Stop Stroll</h3>
+            <ol>
+              <li><strong>5:30 PM &bull; 904 Main St:</strong> Grab a map at Bastrop Museum &amp; Visitor Center.</li>
+              <li><strong>6:00 PM &bull; Old Iron Bridge:</strong> Golden-hour sunset photos above the Colorado River.</li>
+              <li><strong>6:45 PM &bull; Main &amp; Pine Co-ops:</strong> Meet painters, potters &amp; relief printmakers.</li>
+              <li><strong>8:00 PM &bull; Spring &amp; Chestnut:</strong> Curtain time at the 1889 Opera House or river deck acoustic music.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" role="region" aria-label="Filter Bastrop events">
+          <div class="filter-pills" role="group" aria-label="Event category">
+            <button type="button" class="filter-pill is-active" data-event-pill="All">All Events</button>
+            <button type="button" class="filter-pill" data-event-pill="Art Walk">Art Walks &amp; Markets</button>
+            <button type="button" class="filter-pill" data-event-pill="Workshop">Hands-On Workshops</button>
+            <button type="button" class="filter-pill" data-event-pill="Live Stage & Music">Stage &amp; Live Music</button>
+            <button type="button" class="filter-pill" data-event-pill="Exhibition & Tour">Exhibitions &amp; Tours</button>
+          </div>
+
+          <div class="filter-controls">
+            <label class="toggle-check">
+              <input type="checkbox" id="events-free-only">
+              <span>Free Admission Only</span>
+            </label>
+            <input type="search" id="events-search" class="search-input" placeholder="Search event or venue..." aria-label="Search events">
+          </div>
+        </div>
+
+        <div class="results-meta" id="events-results-meta" aria-live="polite">Showing 8 upcoming Bastrop cultural gatherings</div>
+
+        <div class="events-list" id="events-grid"></div>
+      </div>
+    </section>
   </main>
-  <footer></footer>
-  <script src="js/app.js"></script>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">Create Bastrop</div>
+          <p style="margin:0;max-width:360px;font-size:0.93rem;">
+            A community arts &amp; cultural showcase connecting Bastrop, Texas makers, historic venues, working studios, and the neighbors and visitors who love them.
+          </p>
+          <div class="footer-coords">30.1105° N, 97.3153° W &bull; EL CAMINO REAL &amp; COLORADO RIVER</div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About &amp; Heritage</a></li>
+            <li><a href="artists.html">Artists Directory</a></li>
+            <li><a href="collection.html">Original Collection</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Plan Your Visit</h4>
+          <ul class="footer-links">
+            <li><a href="events.html">Events &amp; Art Walks</a></li>
+            <li><a href="studios.html">Studios &amp; Cultural Spaces</a></li>
+            <li><a href="#pass" data-open-pass>My Bastrop Trail Pass</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Participate</h4>
+          <ul class="footer-links">
+            <li><a href="#submit" data-open-submit data-submit-topic="Artist / Portfolio Submission">Submit Your Art</a></li>
+            <li><a href="#submit" data-open-submit data-submit-topic="List a Local Studio or Venue">List a Studio or Space</a></li>
+            <li><a href="mailto:hello@createbastrop.com">hello@createbastrop.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Create Bastrop &bull; Celebrating Bastrop County Art &amp; Culture</span>
+        <span>Built in Bastrop, TX &bull; <a href="https://bastropcode.com" target="_blank" rel="noopener" style="text-decoration:underline;">Bastrop Code Studio</a></span>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
