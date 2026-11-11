@@ -782,7 +782,7 @@
         (spot) => `
         <g class="map-pin" data-pin-id="${escapeHtml(spot.id)}" tabindex="0" role="button" aria-label="Stop ${spot.pinNumber}: ${escapeHtml(spot.name)}">
           <circle class="pin-bg" cx="${spot.mapX}" cy="${spot.mapY}" r="15"/>
-          <text x="${spot.mapX}" y="${spot.mapY + 4}" text-anchor="middle" fill="#FAF6F0" font-family="Space Mono, monospace" font-size="11" font-weight="700">${spot.pinNumber}</text>
+          <text x="${spot.mapX}" y="${spot.mapY + 4}" text-anchor="middle" fill="#FAF6F0" font-family="DM Sans, sans-serif" font-size="11" font-weight="700">${spot.pinNumber}</text>
         </g>
       `
       )
@@ -828,11 +828,11 @@
               <line x1="126" y1="216" x2="194" y2="216" stroke="#FAF6F0" stroke-width="2" stroke-dasharray="4 3"/>
 
               <!-- Geographic Labels -->
-              <text x="52" y="95" fill="#2C5B6B" font-family="Cormorant Garamond, serif" font-style="italic" font-size="16" font-weight="700" transform="rotate(72 52 95)">Colorado River</text>
-              <text x="278" y="85" fill="#696159" font-family="Space Mono, monospace" font-size="9.5" letter-spacing="1">MAIN ST HISTORIC DISTRICT</text>
-              <text x="385" y="102" fill="#696159" font-family="Space Mono, monospace" font-size="9.5" letter-spacing="1">CHESTNUT ST</text>
-              <text x="498" y="48" fill="#274938" font-family="Space Mono, monospace" font-size="9.5" letter-spacing="1">LOST PINES FOREST</text>
-              <text x="455" y="282" fill="#8C5E1A" font-family="Space Mono, monospace" font-size="9.5" letter-spacing="1">HWY 71 · FOUNDRY CORRIDOR</text>
+              <text x="52" y="95" fill="#2C5B6B" font-family="Fraunces, serif" font-style="italic" font-size="16" font-weight="700" transform="rotate(72 52 95)">Colorado River</text>
+              <text x="278" y="85" fill="#696159" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">MAIN ST HISTORIC DISTRICT</text>
+              <text x="385" y="102" fill="#696159" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">CHESTNUT ST</text>
+              <text x="498" y="48" fill="#274938" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">LOST PINES FOREST</text>
+              <text x="455" y="282" fill="#8C5E1A" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">HWY 71 · FOUNDRY CORRIDOR</text>
 
               <!-- Interactive Pins -->
               ${pinsSvg}
