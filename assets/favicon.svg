@@ -7,9 +7,9 @@
   <path d="M13 42 L18 28 L23 42 Z" fill="#4E8568"/>
   <path d="M26 42 L33 17 L40 42 Z" fill="#2A523E"/>
   <!-- 1923 Old Iron Bridge truss arch -->
-  <path d="M8 43 Q32 31 56 43" fill="none" stroke="#FAF6F0" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M8 43 Q32 31 56 43" fill="none" stroke="#F4F0E4" stroke-width="2.5" stroke-linecap="round"/>
   <line x1="8" y1="43" x2="56" y2="43" stroke="#C85538" stroke-width="3"/>
   <!-- Colorado River waves -->
   <path d="M10 50 Q21 46 32 50 T54 50" fill="none" stroke="#7FB3C4" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M14 56 Q24 53 34 56 T50 56" fill="none" stroke="#FAF6F0" stroke-opacity="0.55" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M14 56 Q24 53 34 56 T50 56" fill="none" stroke="#F4F0E4" stroke-opacity="0.55" stroke-width="1.8" stroke-linecap="round"/>
 </svg>

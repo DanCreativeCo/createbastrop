@@ -174,7 +174,7 @@
       <!-- Floating Toast -->
       <div class="toast" id="cb-toast" role="status" aria-live="polite" hidden>
         <span id="cb-toast-text"></span>
-        <button type="button" id="cb-toast-open-pass" style="color:#E7A94B;font-weight:700;text-decoration:underline;">Open Pass</button>
+        <button type="button" id="cb-toast-open-pass" style="color:#D69735;font-weight:700;text-decoration:underline;">Open Pass</button>
       </div>
     `;
     document.body.appendChild(wrapper);
@@ -782,7 +782,7 @@
         (spot) => `
         <g class="map-pin" data-pin-id="${escapeHtml(spot.id)}" tabindex="0" role="button" aria-label="Stop ${spot.pinNumber}: ${escapeHtml(spot.name)}">
           <circle class="pin-bg" cx="${spot.mapX}" cy="${spot.mapY}" r="15"/>
-          <text x="${spot.mapX}" y="${spot.mapY + 4}" text-anchor="middle" fill="#FAF6F0" font-family="DM Sans, sans-serif" font-size="11" font-weight="700">${spot.pinNumber}</text>
+          <text x="${spot.mapX}" y="${spot.mapY + 4}" text-anchor="middle" fill="#F4F0E4" font-family="DM Sans, sans-serif" font-size="11" font-weight="700">${spot.pinNumber}</text>
         </g>
       `
       )
@@ -817,21 +817,21 @@
               <!-- Hwy 71 Corridor South -->
               <line x1="0" y1="275" x2="660" y2="255" stroke="#D2B49C" stroke-width="11"/>
               <!-- Historic Main Street -->
-              <line x1="258" y1="62" x2="268" y2="320" stroke="#FAF6F0" stroke-width="7"/>
+              <line x1="258" y1="62" x2="268" y2="320" stroke="#F4F0E4" stroke-width="7"/>
               <!-- Water Street & Spring Street -->
-              <line x1="208" y1="88" x2="216" y2="300" stroke="#FAF6F0" stroke-width="4.5"/>
-              <line x1="205" y1="152" x2="415" y2="148" stroke="#FAF6F0" stroke-width="4.5"/>
-              <line x1="205" y1="200" x2="425" y2="195" stroke="#FAF6F0" stroke-width="4.5"/>
+              <line x1="208" y1="88" x2="216" y2="300" stroke="#F4F0E4" stroke-width="4.5"/>
+              <line x1="205" y1="152" x2="415" y2="148" stroke="#F4F0E4" stroke-width="4.5"/>
+              <line x1="205" y1="200" x2="425" y2="195" stroke="#F4F0E4" stroke-width="4.5"/>
 
               <!-- 1923 Old Iron Bridge Truss Graphic -->
-              <line x1="122" y1="222" x2="198" y2="222" stroke="#B84A2E" stroke-width="6"/>
-              <line x1="126" y1="216" x2="194" y2="216" stroke="#FAF6F0" stroke-width="2" stroke-dasharray="4 3"/>
+              <line x1="122" y1="222" x2="198" y2="222" stroke="#984831" stroke-width="6"/>
+              <line x1="126" y1="216" x2="194" y2="216" stroke="#F4F0E4" stroke-width="2" stroke-dasharray="4 3"/>
 
               <!-- Geographic Labels -->
-              <text x="52" y="95" fill="#2C5B6B" font-family="Fraunces, serif" font-style="italic" font-size="16" font-weight="700" transform="rotate(72 52 95)">Colorado River</text>
-              <text x="278" y="85" fill="#696159" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">MAIN ST HISTORIC DISTRICT</text>
-              <text x="385" y="102" fill="#696159" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">CHESTNUT ST</text>
-              <text x="498" y="48" fill="#274938" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">LOST PINES FOREST</text>
+              <text x="52" y="95" fill="#4B696B" font-family="Fraunces, serif" font-style="italic" font-size="16" font-weight="700" transform="rotate(72 52 95)">Colorado River</text>
+              <text x="278" y="85" fill="#51634F" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">MAIN ST HISTORIC DISTRICT</text>
+              <text x="385" y="102" fill="#51634F" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">CHESTNUT ST</text>
+              <text x="498" y="48" fill="#3B503C" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">LOST PINES FOREST</text>
               <text x="455" y="282" fill="#8C5E1A" font-family="DM Sans, sans-serif" font-size="9.5" letter-spacing="1">HWY 71 · FOUNDRY CORRIDOR</text>
 
               <!-- Interactive Pins -->

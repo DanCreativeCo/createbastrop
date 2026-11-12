@@ -30,7 +30,7 @@ window.BASTROP_DATA = (function () {
         <path d="M344 182 L358 124 L372 182 Z"/>
       </g>
       <rect y="218" width="400" height="82" fill="url(#river01)"/>
-      <path d="M24 242 H160 M210 255 H355 M90 274 H295" stroke="#FAF6F0" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+      <path d="M24 242 H160 M210 255 H355 M90 274 H295" stroke="#F4F0E4" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
     </svg>`,
 
     'cb-02': `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lost Pines Ash & Alluvial Vessel">
@@ -39,15 +39,15 @@ window.BASTROP_DATA = (function () {
       <path d="M156 58 H244 L234 92 C276 125 282 195 248 248 H152 C118 195 124 125 166 92 Z" fill="#8E3B24"/>
       <!-- Natural pine-ash glaze drip -->
       <path d="M156 58 H244 L234 92 C264 116 272 150 264 176 C246 164 236 192 220 175 C204 158 192 198 175 170 C158 144 142 168 134 152 C136 125 146 105 166 92 Z" fill="#5D7B65" opacity="0.88"/>
-      <path d="M162 66 H238" stroke="#FAF6F0" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+      <path d="M162 66 H238" stroke="#F4F0E4" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
       <circle cx="222" cy="138" r="5" fill="#DF9F42" opacity="0.7"/>
     </svg>`,
 
     'cb-03': `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Iron Bridge Truss at Dusk linocut print">
       <rect width="400" height="300" fill="#1B2A2F"/>
-      <circle cx="96" cy="76" r="28" fill="#E7A94B"/>
+      <circle cx="96" cy="76" r="28" fill="#D69735"/>
       <!-- Parker Through-Truss 1923 Bridge -->
-      <g stroke="#FAF6F0" stroke-width="3" fill="none">
+      <g stroke="#F4F0E4" stroke-width="3" fill="none">
         <path d="M24 190 L92 112 L308 112 L376 190"/>
         <line x1="16" y1="190" x2="384" y2="190" stroke="#C85538" stroke-width="5"/>
         <line x1="92" y1="112" x2="92" y2="190"/>
@@ -82,13 +82,13 @@ window.BASTROP_DATA = (function () {
         <radialGradient id="glow05" cx="50%" cy="48%" r="48%">
           <stop offset="0%" stop-color="#FFF4C2"/>
           <stop offset="45%" stop-color="#E58F38"/>
-          <stop offset="85%" stop-color="#B84A2E"/>
-          <stop offset="100%" stop-color="#274938"/>
+          <stop offset="85%" stop-color="#984831"/>
+          <stop offset="100%" stop-color="#3B503C"/>
         </radialGradient>
       </defs>
       <rect width="400" height="300" fill="#182620"/>
       <ellipse cx="200" cy="156" rx="84" ry="102" fill="url(#glow05)" opacity="0.92"/>
-      <path d="M138 136 Q200 95 262 136 M128 175 Q200 135 272 175 M146 212 Q200 182 254 212" stroke="#FAF6F0" stroke-width="2.5" fill="none" opacity="0.45"/>
+      <path d="M138 136 Q200 95 262 136 M128 175 Q200 135 272 175 M146 212 Q200 182 254 212" stroke="#F4F0E4" stroke-width="2.5" fill="none" opacity="0.45"/>
       <rect x="172" y="46" width="56" height="16" rx="6" fill="#D99B43"/>
     </svg>`,
 
@@ -98,7 +98,7 @@ window.BASTROP_DATA = (function () {
       <!-- Charred Shou Sugi Ban rings & new green shoot -->
       <circle cx="200" cy="150" r="92" stroke="#3D3733" stroke-width="4" fill="none"/>
       <circle cx="200" cy="150" r="68" stroke="#524942" stroke-width="3" fill="none"/>
-      <circle cx="200" cy="150" r="44" stroke="#C4872E" stroke-width="2.5" fill="none"/>
+      <circle cx="200" cy="150" r="44" stroke="#D69735" stroke-width="2.5" fill="none"/>
       <path d="M200 228 L200 118" stroke="#6C9E7D" stroke-width="4" stroke-linecap="round"/>
       <path d="M200 152 L172 126 M200 142 L230 116 M200 168 L226 146" stroke="#7BB88F" stroke-width="3.5" stroke-linecap="round"/>
     </svg>`,
@@ -108,7 +108,7 @@ window.BASTROP_DATA = (function () {
       <line x1="65" y1="34" x2="335" y2="34" stroke="#6E4B26" stroke-width="6" stroke-linecap="round"/>
       <rect x="82" y="37" width="236" height="215" fill="#E8DCC8"/>
       <rect x="82" y="55" width="236" height="38" fill="#233E54"/>
-      <polygon points="82,135 141,102 200,135 259,102 318,135 318,175 82,175" fill="#B84A2E"/>
+      <polygon points="82,135 141,102 200,135 259,102 318,135 318,175 82,175" fill="#984831"/>
       <rect x="82" y="190" width="236" height="36" fill="#9E6F34"/>
       <g stroke="#C8BBA6" stroke-width="2">
         <line x1="96" y1="252" x2="96" y2="276"/><line x1="126" y1="252" x2="126" y2="276"/>
@@ -120,11 +120,11 @@ window.BASTROP_DATA = (function () {
 
     'cb-08': `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chromatic Study: Main Street Brick & Yaupon Shade">
       <rect width="400" height="300" fill="#FAF5EC"/>
-      <rect x="48" y="38" width="142" height="224" rx="4" fill="#B84A2E"/>
+      <rect x="48" y="38" width="142" height="224" rx="4" fill="#984831"/>
       <rect x="118" y="68" width="154" height="168" rx="4" fill="#E4A33D" opacity="0.9"/>
-      <circle cx="268" cy="152" r="76" fill="#274938" opacity="0.92"/>
-      <circle cx="235" cy="175" r="38" fill="#2C5B6B"/>
-      <path d="M72 218 Q185 140 330 218" stroke="#FAF6F0" stroke-width="4" fill="none"/>
+      <circle cx="268" cy="152" r="76" fill="#3B503C" opacity="0.92"/>
+      <circle cx="235" cy="175" r="38" fill="#4B696B"/>
+      <path d="M72 218 Q185 140 330 218" stroke="#F4F0E4" stroke-width="4" fill="none"/>
     </svg>`,
 
     'cb-09': `<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Morning Mist Below Fisherman's Park tintype photograph">
@@ -159,7 +159,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://www.lostpinesartcenter.org',
       description: 'Housed in a striking 13,000-square-foot contemporary building anchored by four historic corrugated grain silos, Lost Pines Art Center hosts rotating Texas exhibitions, studio classrooms, and a working glassblowing hotshop.',
       insiderTip: 'Step inside the converted grain silos on Saturdays to watch molten glass gathered and blown live by resident glass artists.',
-      color: '#274938'
+      color: '#3B503C'
     },
     {
       id: 'bastrop-opera-house',
@@ -174,7 +174,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://bastropoperahouse.org',
       description: 'Built in 1889 and listed on the National Register of Historic Places, this intimate two-story Victorian brick theater has anchored Bastrop performing arts for well over a century—from touring vaudeville to contemporary chamber music and repertory theater.',
       insiderTip: 'Arrive 30 minutes before curtain to admire the original pressed-brick masonry and upstairs balcony acoustics.',
-      color: '#B84A2E'
+      color: '#984831'
     },
     {
       id: 'cor-art-studio',
@@ -189,7 +189,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://corartstudio.com',
       description: 'Founded by artist and educator Djully Marques, COR Art Studio blends classical artistic foundations and color theory with a calm, welcoming studio environment—helping youth and adults build lasting creative independence.',
       insiderTip: 'Great for beginners and seasoned painters alike—check seasonal schedules for color-mixing labs and small-group studio nights.',
-      color: '#C4872E'
+      color: '#D69735'
     },
     {
       id: 'deep-in-the-heart-foundry',
@@ -219,7 +219,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://bastropcountyhistorical.org',
       description: 'Start your Cultural District walk on historic Main Street. Explore artifacts spanning Indigenous Colorado River crossings, El Camino Real de los Tejas, 19th-century loblolly timber mills, and Bastrop’s creative evolution.',
       insiderTip: 'Pick up a printed Downtown Public Art & Historic Architecture walking map at the front desk before strolling Main Street.',
-      color: '#2C5B6B'
+      color: '#4B696B'
     },
     {
       id: 'old-iron-bridge',
@@ -234,7 +234,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://www.visitbastrop.com',
       description: 'Bastrop’s iconic Parker through-truss steel bridge now serves as a pedestrian promenade suspended above the Colorado River, linking Historic Downtown murals to Fisherman’s Park amphitheater and riverside plein-air easels.',
       insiderTip: 'Walk to the center span 20 minutes before sunset for the finest view of bald cypresses and golden light on the Colorado River.',
-      color: '#2C5B6B'
+      color: '#4B696B'
     },
     {
       id: 'bastrop-fine-arts-guild',
@@ -249,7 +249,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://createbastrop.com/studios.html',
       description: 'Artist-run cooperative exhibition space and critique room celebrating Central Texas painters, printmakers, potters, and fiber artists, with rotating monthly member showcases and open life-drawing evenings.',
       insiderTip: 'Stop by during First Friday Art Walks to meet the exhibiting artists in person over local cider and acoustic guitar.',
-      color: '#B84A2E'
+      color: '#984831'
     },
     {
       id: 'ccc-lost-pines',
@@ -264,7 +264,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://tpwd.texas.gov/state-parks/bastrop',
       description: 'Designated a National Historic Landmark, the 1930s Civilian Conservation Corps structures in the Lost Pines feature hand-quarried red ironstone, hand-forged iron hardware, and carved loblolly cedar furniture.',
       insiderTip: 'Inspect the hand-hammered wrought-iron chandeliers and carved red sandstone fireplace inside the historic Refectory.',
-      color: '#274938'
+      color: '#3B503C'
     }
   ];
 
@@ -280,7 +280,7 @@ window.BASTROP_DATA = (function () {
       website: 'https://corartstudio.com',
       instagram: 'artbydju',
       commissionsOpen: true,
-      bannerColors: ['#B84A2E', '#E4A33D', '#274938'],
+      bannerColors: ['#984831', '#E4A33D', '#3B503C'],
       quote: 'Color theory isn’t a set of rigid rules—it’s the language that lets anyone translate how Bastrop light feels onto canvas.',
       shortBio: 'Artist, educator, and co-founder of COR Art Studio, combining classical foundations and structured color study with an encouraging studio community.',
       fullBio: 'Based in Bastrop, Texas, Djully Marques is a painter, educator, and co-founder of COR Art Studio. Blending structured artistic foundations, chromatic harmony, and patient mentorship, she helps beginners and working creatives build genuine skill and lasting creative independence.',
@@ -334,7 +334,7 @@ window.BASTROP_DATA = (function () {
       website: '',
       instagram: 'caminorealpress',
       commissionsOpen: true,
-      bannerColors: ['#1B2A2F', '#C85538', '#E7A94B'],
+      bannerColors: ['#1B2A2F', '#C85538', '#D69735'],
       quote: 'Carving a linoblock feels just like walking the Old Iron Bridge—every steel strut and shadow line earns its place.',
       shortBio: 'Hand-pulls multi-block linocuts on cotton rag and paints narrative community murals celebrating El Camino Real and Bastrop’s riverfront.',
       fullBio: 'Operating an 1898 Chandler & Price platen press near Main Street, Rosa Delgado documents Bastrop’s historic bridges, Victorian storefronts, and Tejano heritage through bold reduction relief prints and collaborative exterior brick murals.',
@@ -352,7 +352,7 @@ window.BASTROP_DATA = (function () {
       website: '',
       instagram: 'loblollyglass',
       commissionsOpen: false,
-      bannerColors: ['#182620', '#E58F38', '#B84A2E'],
+      bannerColors: ['#182620', '#E58F38', '#984831'],
       quote: 'Blowing molten glass inside a century-old Texas grain silo gives every lantern a pulse of heat and history.',
       shortBio: 'Gathers 2,100°F soda-lime glass inside Bastrop’s converted grain silos to form luminous amber, cobalt, and pine-green vessels.',
       fullBio: 'Claire Beaumont shapes free-blown lighting pendants and sculptural vessels inspired by golden hour filtering through the Lost Pines canopy, regularly demonstrating hot-glass gathering for students and weekend visitors.',
@@ -370,7 +370,7 @@ window.BASTROP_DATA = (function () {
       website: '',
       instagram: 'hollowaytimber',
       commissionsOpen: true,
-      bannerColors: ['#23201E', '#6C9E7D', '#C4872E'],
+      bannerColors: ['#23201E', '#6C9E7D', '#D69735'],
       quote: 'The charred rings of Bastrop’s loblolly pines aren’t scars of loss—they’re a testament to how fiercely this forest regenerates.',
       shortBio: 'Transforms wind-felled loblolly pine and 2011 fire-salvaged timber into Shou Sugi Ban wall reliefs and heirloom architectural tables.',
       fullBio: 'Working with sustainably salvaged Bastrop County loblolly pine, post oak, and river pecan, Marcus Holloway pairs Japanese charred-timber preservation with traditional mortise-and-tenon Texas joinery.',
@@ -388,7 +388,7 @@ window.BASTROP_DATA = (function () {
       website: '',
       instagram: 'yauponandloom',
       commissionsOpen: true,
-      bannerColors: ['#233E54', '#B84A2E', '#9E6F34'],
+      bannerColors: ['#233E54', '#984831', '#9E6F34'],
       quote: 'Wild Bastrop pecan hulls, red ironstone clay, and yaupon holly yield colors no synthetic tube could ever imitate.',
       shortBio: 'Forages seasonal Bastrop County botanicals—pecan hulls, marigold, yaupon, and coreopsis—to dye Texas wool and cotton floor-loom tapestries.',
       fullBio: 'On an eight-shaft maple floor loom, Hannah Lindholm weaves geometric tapestries rooted in Central Texas seasonal foraging, hosting community dye-pot afternoons throughout spring and autumn.',
@@ -448,7 +448,7 @@ window.BASTROP_DATA = (function () {
       priceValue: 980,
       availability: 'Available',
       locationNote: 'COR Art Studio',
-      palette: ['#B84A2E', '#E4A33D', '#274938', '#2C5B6B'],
+      palette: ['#984831', '#E4A33D', '#3B503C', '#4B696B'],
       excerpt: 'Architectural color study distilling 1890s Main Street brick storefronts, brass signage, and yaupon shade into balanced geometric planes.',
       story: 'Created as a signature demonstration piece on color temperature and proportion, inspired by midday sun striking historic masonry along Downtown Bastrop.'
     },
@@ -484,7 +484,7 @@ window.BASTROP_DATA = (function () {
       priceValue: 320,
       availability: 'Available',
       locationNote: 'Bastrop Fine Arts Guild',
-      palette: ['#1B2A2F', '#C85538', '#E7A94B', '#7FB3C4'],
+      palette: ['#1B2A2F', '#C85538', '#D69735', '#7FB3C4'],
       excerpt: 'Crisp hand-carved geometry honoring Bastrop’s iconic 1923 Parker through-truss bridge spanning the Colorado River.',
       story: 'Pulled by hand on an 1898 platen press, celebrating the historic pedestrian span that connects Downtown Bastrop’s arts corridor with riverside trails.'
     },
@@ -520,7 +520,7 @@ window.BASTROP_DATA = (function () {
       priceValue: 520,
       availability: 'Available',
       locationNote: 'Lost Pines Silo Glass Studio',
-      palette: ['#E58F38', '#B84A2E', '#274938', '#FFF4C2'],
+      palette: ['#E58F38', '#984831', '#3B503C', '#FFF4C2'],
       excerpt: 'Hand-blown inside one of Bastrop’s historic grain silos, glowing with layered amber resin tones and forest-green wraps.',
       story: 'Rolled across marvered silver leaf while at 2,000°F so light refracts like late-afternoon sun piercing loblolly needles.'
     },
@@ -538,7 +538,7 @@ window.BASTROP_DATA = (function () {
       priceValue: 1850,
       availability: 'On View in District',
       locationNote: 'On View · Bastrop Visitor & Cultural Center',
-      palette: ['#23201E', '#6C9E7D', '#C4872E', '#524942'],
+      palette: ['#23201E', '#6C9E7D', '#D69735', '#524942'],
       excerpt: 'Carved and flame-preserved loblolly growth rings inlaid with oxidized brass, honoring the rebirth of the Lost Pines forest.',
       story: 'Crafted from a wind-fallen timber salvaged near Park Road 1A, celebrating fifteen years of ecological resilience and community renewal.'
     },
@@ -556,7 +556,7 @@ window.BASTROP_DATA = (function () {
       priceValue: 790,
       availability: 'Available',
       locationNote: 'Yaupon & Loom Studio',
-      palette: ['#233E54', '#B84A2E', '#9E6F34', '#E8DCC8'],
+      palette: ['#233E54', '#984831', '#9E6F34', '#E8DCC8'],
       excerpt: 'Hand-loomed wool tapestry colored entirely with botanical and mineral pigments foraged within ten miles of Downtown Bastrop.',
       story: 'Mounted on a hand-rubbed Bastrop pecan branch; each horizontal band maps the strata of river water, red bluff earth, and autumn orchard.'
     },
@@ -708,29 +708,29 @@ window.BASTROP_DATA = (function () {
   }
 
   function getArtistBanner(colors) {
-    const [c1, c2, c3] = colors || ['#1D382B', '#B84A2E', '#D99B43'];
+    const [c1, c2, c3] = colors || ['#1D382B', '#984831', '#D99B43'];
     return `<svg viewBox="0 0 400 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="400" height="150" fill="${c1}"/>
       <circle cx="325" cy="40" r="68" fill="${c2}" opacity="0.82"/>
       <path d="M0 112 Q130 62 255 110 T400 90 L400 150 L0 150 Z" fill="${c3}" opacity="0.72"/>
-      <path d="M0 132 Q160 98 310 132 T400 122 L400 150 L0 150 Z" fill="#171513" opacity="0.22"/>
+      <path d="M0 132 Q160 98 310 132 T400 122 L400 150 L0 150 Z" fill="#2D3E2E" opacity="0.22"/>
     </svg>`;
   }
 
   function getStudioVisual(spot) {
-    const accent = spot.color || '#274938';
+    const accent = spot.color || '#3B503C';
     return `<svg viewBox="0 0 500 185" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="500" height="185" fill="#EFE7DA"/>
-      <circle cx="410" cy="54" r="34" fill="#E7A94B" opacity="0.65"/>
+      <circle cx="410" cy="54" r="34" fill="#D69735" opacity="0.65"/>
       <path d="M0 135 Q130 92 275 128 T500 108 L500 185 L0 185 Z" fill="${accent}" opacity="0.88"/>
       <!-- Architectural Bastrop motif -->
-      <g fill="#FAF6F0" opacity="0.9">
+      <g fill="#F4F0E4" opacity="0.9">
         <rect x="64" y="76" width="32" height="68" rx="3"/>
         <rect x="102" y="64" width="32" height="80" rx="3"/>
         <polygon points="154,144 154,88 186,68 218,88 218,144"/>
       </g>
-      <path d="M245 144 Q330 102 415 144" fill="none" stroke="#FAF6F0" stroke-width="3"/>
-      <line x1="235" y1="144" x2="425" y2="144" stroke="#B84A2E" stroke-width="3.5"/>
+      <path d="M245 144 Q330 102 415 144" fill="none" stroke="#F4F0E4" stroke-width="3"/>
+      <line x1="235" y1="144" x2="425" y2="144" stroke="#984831" stroke-width="3.5"/>
     </svg>`;
   }
 
