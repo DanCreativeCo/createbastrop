@@ -1236,6 +1236,56 @@
   }
 
   /* ------------------------------------------------------------------------
+     Train Bridge — the train's position follows the page scroll
+     ------------------------------------------------------------------------ */
+  function initTrainBridge() {
+    const scene = document.querySelector('[data-train-bridge]');
+    if (!scene) return;
+    const svg = scene.querySelector('svg');
+    const train = scene.querySelector('[data-train]');
+    const pines = scene.querySelector('.tb-pines');
+    const wheels = Array.from(scene.querySelectorAll('.tb-wheel')).map(el => ({
+      el,
+      radius: Number(el.querySelector('circle').getAttribute('r'))
+    }));
+    const viewW = svg.viewBox.baseVal.width;
+    const viewH = svg.viewBox.baseVal.height;
+    const trainW = Number(train.dataset.trainWidth);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let queued = false;
+
+    function draw() {
+      queued = false;
+      const rect = svg.getBoundingClientRect();
+      if (!rect.width) return;
+      // The SVG is cropped to fill the band, so work out which slice is on screen.
+      const scale = Math.max(rect.width / viewW, rect.height / viewH);
+      const visibleW = rect.width / scale;
+      const left = (viewW - visibleW) / 2;
+      // 0 as the band enters the bottom of the viewport, 1 as it leaves the top.
+      const raw = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      const progress = reduceMotion.matches ? 0.5 : Math.min(1, Math.max(0, raw));
+      const x = left - trainW + progress * (visibleW + trainW);
+      train.setAttribute('transform', `translate(${x.toFixed(1)} 0)`);
+      wheels.forEach(w => {
+        w.el.setAttribute('transform', `rotate(${((x / w.radius) * 57.2958 % 360).toFixed(1)})`);
+      });
+      if (pines) pines.setAttribute('transform', `translate(${((0.5 - progress) * 40).toFixed(1)} 0)`);
+    }
+
+    function queue() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    reduceMotion.addEventListener('change', queue);
+    draw();
+  }
+
+  /* ------------------------------------------------------------------------
      Bootstrap
      ------------------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', () => {
@@ -1243,6 +1293,7 @@
     bindGlobalActions();
     initDistrictMap();
     initHomePage();
+    initTrainBridge();
     initCollectionPage();
     initArtistsPage();
     initEventsPage();
